@@ -1,0 +1,18 @@
+  %% <%= @title %>
+  {<%= @port %>, ejabberd_service, [
+  			    {access, all},
+  			    {shaper_rule, fast},
+  			    {ip, {127, 0, 0, 1}},
+<% if @hosts.is_a? Array -%>
+  			    {hosts, [
+<%- maxhosts=@hosts.length; i=0; @hosts.each do |host| -%>
+				"<%= host -%>" <%- i=i+1 -%> <%- if i != maxhosts -%> <%= "," -%> <%- end %>
+<%- end -%>
+				],
+<%- else -%>
+  			    {hosts, ["<%= @hosts %>"],
+<% end -%>
+  			     [{password, "<%= @password %>"}]
+  			    }
+  			   ]},
+

@@ -1,0 +1,14 @@
+{
+  "name": "buzzdeee-ejabberd",
+  "version": "0.1.0",
+  "author": "Sebastian Reitenbach",
+  "summary": "A Puppet Module to manage the ejabberd xmpp server",
+  "license": "Apache 2.0",
+  "source": "https://github.com/buzzdeee/buzzdeee-ejabberd.git",
+  "project_page": "https://github.com/buzzdeee/buzzdeee-ejabberd",
+  "issues_url": "https://github.com/buzzdeee/buzzdeee-ejabberd/issues",
+  "dependencies": [
+    {"name":"puppetlabs-stdlib","version_requirement":">= 1.0.0"}
+  ]
+}
+

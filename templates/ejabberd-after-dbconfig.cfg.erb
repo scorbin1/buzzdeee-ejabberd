@@ -1,0 +1,31 @@
+%%
+%% Number of connections to open to the database for each virtual host
+%%
+%%{odbc_pool_size, 10}.
+
+%%
+%% Interval to make a dummy SQL request to keep the connections to the
+%% database alive. Specify in seconds: for example 28800 means 8 hours
+%%
+%%{odbc_keepalive_interval, undefined}.
+
+
+%%%.   ===============
+%%%'   TRAFFIC SHAPERS
+
+%%
+%% The "normal" shaper limits traffic speed to 1000 B/s
+%%
+{shaper, normal, {maxrate, 1000}}.
+
+%%
+%% The "fast" shaper limits traffic speed to 50000 B/s
+%%
+{shaper, fast, {maxrate, 50000}}.
+
+%%
+%% This option specifies the maximum number of elements in the queue
+%% of the FSM. Refer to the documentation for details.
+%%
+{max_fsm_queue, 1000}.
+
