@@ -1,3 +1,6 @@
+# Private class, do not use directly.
+# These parameters drive the module.
+
 class ejabberd::params {
   $templatestorage = 'puppet'
   $ejabberd_group = '_ejabberd'

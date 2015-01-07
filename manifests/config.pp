@@ -1,3 +1,6 @@
+# Private class, do not use directly.
+# Takes care about the ejabberd.conf file.
+
 class ejabberd::config (
   $log_level,
   $domains,

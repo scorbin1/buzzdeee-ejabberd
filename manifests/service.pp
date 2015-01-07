@@ -1,3 +1,6 @@
+# Private class, do not use directly.
+# Takes care about the service.
+
 class ejabberd::service (
   $service_ensure,
   $service_enable,

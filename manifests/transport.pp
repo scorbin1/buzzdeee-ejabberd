@@ -1,3 +1,6 @@
+# Private defined type, do not use directly.
+# Takes care of configuring external transports.
+
 define ejabberd::transport (
   $port,
   $hosts,

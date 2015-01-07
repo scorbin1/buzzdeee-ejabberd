@@ -29,11 +29,11 @@
 #
 # === Authors
 #
-# Author Name <author@domain.com>
+# Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
 #
 # === Copyright
 #
-# Copyright 2014 Your name here, unless otherwise noted.
+# Copyright 2014 Sebastian Reitenbach, unless otherwise noted.
 #
 class ejabberd (
   $templatestorage = $ejabberd::params::templatestorage,
@@ -74,8 +74,8 @@ class ejabberd (
   }
 
   class { 'ejabberd::certificate':
-    ejabberd_group => $ejabberd_group,
-    servercertfile => $servercertfile,
+    ejabberd_group  => $ejabberd_group,
+    servercertfile  => $servercertfile,
     templatestorage => $templatestorage,
   }
 
@@ -85,7 +85,8 @@ class ejabberd (
     service_flags  => $service_flags,
   }
 
-  Class['ejabberd::install'] -> 
+  Class['ejabberd::install'] ->
+  Class['ejabberd::certificate'] ~>
   Class['ejabberd::config'] ~>
   Class['ejabberd::service']
 
