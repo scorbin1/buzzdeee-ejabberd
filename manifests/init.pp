@@ -52,7 +52,6 @@ class ejabberd (
   $enable_stun     = $ejabberd::params::enable_stun,
   $language        = $ejabberd::params::language,
   $transports      = $ejabberd::params::transports,
-  $templatestorage = $ejabberd::params::templatestorage,
 ) inherits ejabberd::params {
 
   class { 'ejabberd::install':
