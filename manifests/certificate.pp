@@ -15,7 +15,7 @@ class ejabberd::certificate (
                   mode   => '0640',
                   source => 'ejabberd/ejabberd.pem'
                 }
-              }
+    }
     'hiera': {
                 file { $servercertfile:
                   owner   => 'root',
@@ -23,7 +23,10 @@ class ejabberd::certificate (
                   mode    => '0640',
                   content => hiera($templatefile),
                 }
-              }
+    }
+    'none': {
+      # deliberately do nothing here, it's externally taken care of
+    }
     default: { fail("templatestorage must be either 'puppet' or 'hiera'") }
   }
 }
