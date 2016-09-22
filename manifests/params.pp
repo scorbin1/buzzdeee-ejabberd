@@ -23,6 +23,7 @@ class ejabberd::params {
   $db_params  = undef
   $enable_stun = true
   $language = 'en'
+  $package_ensure = 'installed'
   $service_ensure = 'running'
   $service_enable = true
   $service_flags = undef
