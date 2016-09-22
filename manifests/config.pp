@@ -69,5 +69,4 @@ class ejabberd::config (
     order   => '70',
   }
 
-  
 }
