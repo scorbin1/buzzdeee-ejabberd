@@ -7,11 +7,28 @@
 
 #
 #
+# === Parameters
+#
+# @param port
+#   Type: Integer
+#   Default Value: defined by calling class
+#   Description: Port number
+#
+# @param hosts
+#   Type: String, or Array of Strings
+#   Default Value: defined by calling class
+#   Description: host, or Array of hosts
+#
+# @param password
+#   Type: String
+#   Default Value: defined by calling class
+#   Description: password
+#
 
 define ejabberd::transport (
-  $port,
-  $hosts,
-  $password,
+  Integer                        $port,
+  Variant[Array[String], String] $hosts,
+  String                         $password,
 ) {
   concat::fragment { "ejabberd-transport-${title}":
     target  => '/etc/ejabberd/ejabberd.cfg',
