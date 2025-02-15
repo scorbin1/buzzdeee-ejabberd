@@ -3,7 +3,17 @@
 
 class ejabberd::params {
   $templatestorage = 'puppet'
-  $ejabberd_group = '_ejabberd'
+
+  case $facts['os']['family'] {
+    'Debian': {
+      $ejabberd_group = 'ejabberd'
+    }
+
+    default: {
+      $ejabberd_group = '_ejabberd'
+    }
+  }
+
   $log_level = '1'
   $domains = ['example.net', 'example.com', 'example.org']
   $servercertfile = '/etc/ejabberd/mycert.pem'
