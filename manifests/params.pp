@@ -8,7 +8,7 @@ class ejabberd::params {
   $domains = ['example.net', 'example.com', 'example.org']
   $servercertfile = '/etc/ejabberd/mycert.pem'
   $auth_method = 'ldap'
-  $transports = undef
+  $transports = {}
   $auth_attrs = {
     servers    => 'localhost',
     uidattr    => 'uid',
@@ -26,6 +26,6 @@ class ejabberd::params {
   $package_ensure = 'installed'
   $service_ensure = 'running'
   $service_enable = true
-  $service_flags = undef
+  $service_flags = ''
   $pidfile = '/var/run/ejabberd/ejabberd.pid'
 }
