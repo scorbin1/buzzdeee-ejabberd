@@ -142,6 +142,18 @@
 #
 # Copyright 2014 Sebastian Reitenbach, unless otherwise noted.
 #
+
+type Ejabberd::AuthStruct = Struct[{
+    servers    => Variant[Array[String], String],
+    uidattr    => String,
+    port       => Enum['389', '636'],
+    encrypt    => Enum['none', 'tls'],
+    searchbase => String,
+    rootdn     => String,
+    password   => String,
+    ldapfilter => String,
+}]
+
 class ejabberd (
   Enum['puppet','hiera','none']                               $templatestorage = $ejabberd::params::templatestorage,
   String                                                      $ejabberd_group  = $ejabberd::params::ejabberd_group,
@@ -149,16 +161,7 @@ class ejabberd (
   Variant[Array[String], String]                              $domains         = $ejabberd::params::domains,
   String                                                      $servercertfile  = $ejabberd::params::servercertfile,
   Enum['anonymous','external','internal','ldap','odbc','pam'] $auth_method     = $ejabberd::params::auth_method,
-  Struct[{
-      servers    => Variant[Array[String], String],
-      uidattr    => String,
-      port       => Enum[389, 636],
-      encrypt    => Enum['none', 'tls'],
-      searchbase => String,
-      rootdn     => String,
-      password   => String,
-      ldapfilter => String,
-  }]                                                          $auth_attrs      = $ejabberd::params::auth_attrs,
+  Ejabberd::AuthStruct                                        $auth_attrs      = $ejabberd::params::auth_attrs,
   Enum['mssql', 'mysql', 'postgresql', 'mnesia']              $db_backend      = $ejabberd::params::db_backend,
   String                                                      $db_params       = $ejabberd::params::db_params,
   String                                                      $package_ensure  = $ejabberd::params::package_ensure,
