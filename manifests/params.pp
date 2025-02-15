@@ -20,7 +20,7 @@ class ejabberd::params {
     ldapfilter => '(objectClass=shadowAccount)',
   }
   $db_backend = 'mnesia'
-  $db_params  = undef
+  $db_params  = ''
   $enable_stun = true
   $language = 'en'
   $package_ensure = 'installed'
