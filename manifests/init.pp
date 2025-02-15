@@ -4,12 +4,28 @@
 #
 # === Parameters
 #
-# Document parameters here.
+# @param servercertfile
+#   Type: String
+#   Default Value: '/etc/ejabberd/mycert.pem' from $ejabberd::params::servercertfile
+#   Description: The path where the server certificate file already exists or should
+#                otherwise be installed, depending on templatestorage parameter value
 #
-# [*sample_parameter*]
-#   Explanation of what this parameter affects and what it defaults to.
-#   e.g. "Specify one or more upstream ntp servers as an array."
+# @param templatestorage
+#   Type: Enum['puppet','hiera','none']
+#   Default Value: 'puppet' from $ejabberd::params::templatestorage
+#   Description: Define how to source/create certificate file 
+#     'puppet' - source certificate file from puppet hosted file ejabberd/ejabberd.pem
+#                Bug: This option not working on debian linux.  Likely relative source
+#                     paths are deprecated feature
+#     'hiera'  - source certificate file via hiera lookup using file name defined in
+#                $servercertfile, with file path removed, as the argument to hiera()
+#     'none'   - Set to this value if server ssl certificate already exists or is defined
+#                externally. $servercertfile should still be defined for use in configuration
 #
+# @param ejabberd_group
+#   Type: String
+#   Default Value: '_ejabberd' from $ejabberd::params::ejabberd_group
+#   Description: The group that should own the server certificate file. User is always root.
 #
 #
 # === Examples
@@ -27,22 +43,22 @@
 # Copyright 2014 Sebastian Reitenbach, unless otherwise noted.
 #
 class ejabberd (
-  $templatestorage = $ejabberd::params::templatestorage,
-  $ejabberd_group  = $ejabberd::params::ejabberd_group,
-  $log_level       = $ejabberd::params::log_level,
-  $domains         = $ejabberd::params::domains,
-  $servercertfile  = $ejabberd::params::servercertfile,
-  $auth_method     = $ejabberd::params::auth_method,
-  $auth_attrs      = $ejabberd::params::auth_attrs,
-  $db_backend      = $ejabberd::params::db_backend,
-  $db_params       = $ejabberd::params::db_params,
-  $package_ensure  = $ejabberd::params::package_ensure,
-  $service_ensure  = $ejabberd::params::service_ensure,
-  $service_enable  = $ejabberd::params::service_enable,
-  $service_flags   = $ejabberd::params::service_flags,
-  $enable_stun     = $ejabberd::params::enable_stun,
-  $language        = $ejabberd::params::language,
-  $transports      = $ejabberd::params::transports,
+  Enum['puppet','hiera','none'] $templatestorage = $ejabberd::params::templatestorage,
+  String                        $ejabberd_group  = $ejabberd::params::ejabberd_group,
+  $log_level                                     = $ejabberd::params::log_level,
+  $domains                                       = $ejabberd::params::domains,
+  String                       $servercertfile   = $ejabberd::params::servercertfile,
+  $auth_method                                   = $ejabberd::params::auth_method,
+  $auth_attrs                                    = $ejabberd::params::auth_attrs,
+  $db_backend                                    = $ejabberd::params::db_backend,
+  $db_params                                     = $ejabberd::params::db_params,
+  $package_ensure                                = $ejabberd::params::package_ensure,
+  $service_ensure                                = $ejabberd::params::service_ensure,
+  $service_enable                                = $ejabberd::params::service_enable,
+  $service_flags                                 = $ejabberd::params::service_flags,
+  $enable_stun                                   = $ejabberd::params::enable_stun,
+  $language                                      = $ejabberd::params::language,
+  $transports                                    = $ejabberd::params::transports,
 ) inherits ejabberd::params {
   class { 'ejabberd::install':
     package_ensure   => $package_ensure,
