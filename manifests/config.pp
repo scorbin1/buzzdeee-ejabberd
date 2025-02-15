@@ -1,6 +1,10 @@
-# Private class, do not use directly.
-# Takes care about the ejabberd.conf file.
-
+# @api private
+#
+# !!DO NOT CALL THIS CLASS DIRECTLY!!
+# Called by ejabberd::init
+#
+# @summary configures ejabberd.conf file
+#
 class ejabberd::config (
   $log_level,
   $domains,
