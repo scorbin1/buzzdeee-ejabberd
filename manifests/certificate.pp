@@ -12,7 +12,7 @@ class ejabberd::certificate (
         owner  => 'root',
         group  => $ejabberd_group,
         mode   => '0640',
-        source => 'ejabberd/ejabberd.pem'
+        source => 'ejabberd/ejabberd.pem',
       }
     }
     'hiera': {
