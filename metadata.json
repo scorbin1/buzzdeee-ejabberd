@@ -8,16 +8,30 @@
   "project_page": "https://github.com/buzzdeee/buzzdeee-ejabberd",
   "issues_url": "https://github.com/buzzdeee/buzzdeee-ejabberd/issues",
   "dependencies": [
-    {"name":"puppetlabs-concat","version_requirement":">= 1.1.0"}
+    {
+      "name": "puppetlabs-concat",
+      "version_requirement": ">= 1.1.0"
+    }
   ],
   "operatingsystem_support": [
     {
       "operatingsystem": "OpenBSD",
-      "operatingsystemrelease": [ "5.6" ]
+      "operatingsystemrelease": [
+        "5.6"
+      ]
+    }
+  ],
+  "requirements": [
+    {
+      "name": "puppet",
+      "version_requirement": ">= 7.24 < 9.0.0"
     }
   ],
   "tags": [
-    "OpenBSD", "xmpp"
-  ]
+    "OpenBSD",
+    "xmpp"
+  ],
+  "pdk-version": "3.4.0",
+  "template-url": "pdk-default#3.4.0",
+  "template-ref": "tags/3.4.0-0-gd3cc13f"
 }
-
