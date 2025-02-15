@@ -1,5 +1,12 @@
-# Private defined type, do not use directly.
-# Takes care of configuring external transports.
+# @api private
+#
+# !!DO NOT CALL THIS CLASS DIRECTLY!!
+# Resources created by ejabberd::init
+#
+# @summary # Takes care of configuring external transports.
+
+#
+#
 
 define ejabberd::transport (
   $port,
