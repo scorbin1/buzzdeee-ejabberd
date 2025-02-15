@@ -83,8 +83,8 @@ class ejabberd (
     service_flags  => $service_flags,
   }
 
-  Class['ejabberd::install'] ->
-  Class['ejabberd::certificate'] ~>
-  Class['ejabberd::config'] ~>
-  Class['ejabberd::service']
+  Class['ejabberd::install']
+  -> Class['ejabberd::certificate']
+  ~> Class['ejabberd::config']
+  ~> Class['ejabberd::service']
 }
