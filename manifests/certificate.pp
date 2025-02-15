@@ -5,24 +5,23 @@ class ejabberd::certificate (
   $templatestorage,
   $ejabberd_group,
 ) {
-
   $templatefile = split($servercertfile, '/')[-1]
   case $templatestorage {
     'puppet': {
-                file { $servercertfile:
-                  owner  => 'root',
-                  group  => $ejabberd_group,
-                  mode   => '0640',
-                  source => 'ejabberd/ejabberd.pem'
-                }
+      file { $servercertfile:
+        owner  => 'root',
+        group  => $ejabberd_group,
+        mode   => '0640',
+        source => 'ejabberd/ejabberd.pem'
+      }
     }
     'hiera': {
-                file { $servercertfile:
-                  owner   => 'root',
-                  group   => $ejabberd_group,
-                  mode    => '0640',
-                  content => hiera($templatefile),
-                }
+      file { $servercertfile:
+        owner   => 'root',
+        group   => $ejabberd_group,
+        mode    => '0640',
+        content => hiera($templatefile),
+      }
     }
     'none': {
       # deliberately do nothing here, it's externally taken care of

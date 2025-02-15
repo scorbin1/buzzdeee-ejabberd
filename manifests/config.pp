@@ -68,5 +68,4 @@ class ejabberd::config (
     content => template('ejabberd/ejabberd-end.cfg.erb'),
     order   => '70',
   }
-
 }

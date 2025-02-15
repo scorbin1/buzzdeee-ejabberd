@@ -53,7 +53,6 @@ class ejabberd (
   $language        = $ejabberd::params::language,
   $transports      = $ejabberd::params::transports,
 ) inherits ejabberd::params {
-
   class { 'ejabberd::install':
     package_ensure   => $package_ensure,
   }
@@ -88,5 +87,4 @@ class ejabberd (
   Class['ejabberd::certificate'] ~>
   Class['ejabberd::config'] ~>
   Class['ejabberd::service']
-
 }
