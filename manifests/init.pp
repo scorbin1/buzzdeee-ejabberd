@@ -27,6 +27,13 @@
 #   Default Value: '_ejabberd' from $ejabberd::params::ejabberd_group
 #   Description: The group that should own the server certificate file. User is always root.
 #
+# @param package_ensure
+#   Type: valid package resource ensure value.  See package resource documentation for
+#         more information
+#   Default Value: 'installed' from ejabberd::params::package_ensure
+#   Description: Package version or any other value acceptable by the ensure attribute
+#                of a package resource
+#
 #
 # === Examples
 #
@@ -52,7 +59,7 @@ class ejabberd (
   $auth_attrs                                    = $ejabberd::params::auth_attrs,
   $db_backend                                    = $ejabberd::params::db_backend,
   $db_params                                     = $ejabberd::params::db_params,
-  $package_ensure                                = $ejabberd::params::package_ensure,
+  String                       $package_ensure   = $ejabberd::params::package_ensure,
   $service_ensure                                = $ejabberd::params::service_ensure,
   $service_enable                                = $ejabberd::params::service_enable,
   $service_flags                                 = $ejabberd::params::service_flags,
