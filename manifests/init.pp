@@ -34,6 +34,22 @@
 #   Description: Package version or any other value acceptable by the ensure attribute
 #                of a package resource
 #
+# @param service_ensure
+#   Type: String
+#   Default Value: defined by calling class
+#   Description: Desired ejabberd service resource status. This parameter
+#                accepts valid service resource ensure values. See service
+#                resource documentation for more information
+#
+# @param service_enable
+#   Type: Boolean
+#   Default Value: defined by calling class
+#   Description: Whether service should be started on boot
+#
+# @param service_flags
+#   Type: String
+#   Default Value: defined by calling class
+#   Description: String of parameters to pass to the service when starting
 #
 # === Examples
 #
@@ -60,9 +76,9 @@ class ejabberd (
   $db_backend                                    = $ejabberd::params::db_backend,
   $db_params                                     = $ejabberd::params::db_params,
   String                       $package_ensure   = $ejabberd::params::package_ensure,
-  $service_ensure                                = $ejabberd::params::service_ensure,
-  $service_enable                                = $ejabberd::params::service_enable,
-  $service_flags                                 = $ejabberd::params::service_flags,
+  String                       $service_ensure   = $ejabberd::params::service_ensure,
+  Boolean                      $service_enable   = $ejabberd::params::service_enable,
+  String                       $service_flags    = $ejabberd::params::service_flags,
   $enable_stun                                   = $ejabberd::params::enable_stun,
   $language                                      = $ejabberd::params::language,
   $transports                                    = $ejabberd::params::transports,
