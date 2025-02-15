@@ -1,6 +1,11 @@
-# Private class, do not use directly.
-# Takes care about the package installation.
-
+# @api private
+#
+# !!DO NOT CALL THIS CLASS DIRECTLY!!
+# Called by ejabberd::init
+#
+# @summary installs ejabberd package
+#
+#
 class ejabberd::install (
   $package_ensure,
 ) {
