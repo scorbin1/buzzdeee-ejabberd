@@ -1,9 +1,9 @@
 # Private class, do not use directly.
 # Takes care about installation of server certificates.
 class ejabberd::certificate (
-  $servercertfile,
-  $templatestorage,
-  $ejabberd_group,
+  String $servercertfile,
+  Enum['puppet','hiera','none'] $templatestorage,
+  String $ejabberd_group,
 ) {
   $templatefile = split($servercertfile, '/')[-1]
   case $templatestorage {
