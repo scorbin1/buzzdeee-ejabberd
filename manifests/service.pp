@@ -1,6 +1,11 @@
-# Private class, do not use directly.
-# Takes care about the service.
-
+# @api private
+#
+# !!DO NOT CALL THIS CLASS DIRECTLY!!
+# Called by ejabberd::init
+#
+# @summary Sets up ejabberd service
+#
+#
 class ejabberd::service (
   $service_ensure,
   $service_enable,
