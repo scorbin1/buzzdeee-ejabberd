@@ -14,6 +14,16 @@ class ejabberd::params {
     }
   }
 
+  $enable_firewall_rules        = false
+  $ejabberd_clients             = ['0.0.0.0/0']
+  $ejabberd_firewall_rule_order = '119'
+  $ejabberd_port                = 5443
+  $ejabberd_xmpp_port           = 5222
+  $ejabberd_xmpps_port          = 5223
+  $ejabberd_xmpp_s2s_port       = 5269
+  $ejabberd_xmpp_admin_ui_port  = 5280
+  $ejabberd_mqtt_port           = 1883
+
   $log_level = 'info'
   $domains = ['example.net', 'example.com', 'example.org']
   $servercertfile = '/etc/ejabberd/mycert.pem'

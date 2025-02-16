@@ -122,6 +122,51 @@
 #   Description: Default language used for server messages.  Accepts valid
 #                language codes.  ie... en,ru,cn
 #
+# @param enable_firewall_rules
+#   Type: Boolean
+#   Default Value: false
+#   Description: If enabled and firewall enabled, configure rules for ejabberd
+#
+# @param ejabberd_clients
+#   Type: Array
+#   Default value: ['0.0.0.0/0']
+#   An array of IPs permitted to access ejabberd
+#
+# @param ejabberd_firewall_rule_order
+#   Type: Integer
+#   Default value: '119'
+#   ejabberd firewall rule order.  This sets the order of the rules.  Lower numbered rules are processed first.  Numbers starting with 0 must be single quoted
+#
+# @param ejabberd_port
+#   Type: Integer
+#   Default value: '5443'
+#   ejabberd service port.
+#
+# @param ejabberd_xmpp_port
+#   Type: Integer
+#   Default value: '5222'
+#   ejabberd xmpp service port.
+#
+# @param ejabberd_xmpps_port
+#   Type: Integer
+#   Default value: '5223'
+#   ejabberd xmpps service port.
+#
+# @param ejabberd_xmpp_s2s_port
+#   Type: Integer
+#   Default value: '5269'
+#   ejabberd xmpp s2s service port.
+#
+# @param ejabberd_xmpp_admin_ui_port
+#   Type: Integer
+#   Default value: '5280'
+#   ejabberd xmpp admin ui service port.
+#
+# @param ejabberd_mqtt_port
+#   Type: Integer
+#   Default value: '1883'
+#   ejabberd mqtt service port.
+#
 # === Examples
 #
 #  class { 'ejabberd':
@@ -149,22 +194,31 @@ type Ejabberd::AuthStruct = Struct[{
 }]
 
 class ejabberd (
-  Enum['puppet','hiera','none']                               $templatestorage = $ejabberd::params::templatestorage,
-  String                                                      $ejabberd_group  = $ejabberd::params::ejabberd_group,
-  String                                                      $log_level       = $ejabberd::params::log_level,
-  Variant[Array[String], String]                              $domains         = $ejabberd::params::domains,
-  String                                                      $servercertfile  = $ejabberd::params::servercertfile,
-  Enum['anonymous','external','internal','ldap','odbc','pam'] $auth_method     = $ejabberd::params::auth_method,
-  Ejabberd::AuthStruct                                        $auth_attrs      = $ejabberd::params::auth_attrs,
-  Enum['mssql', 'mysql', 'postgresql', 'mnesia']              $db_backend      = $ejabberd::params::db_backend,
-  String                                                      $db_params       = $ejabberd::params::db_params,
-  String                                                      $package_ensure  = $ejabberd::params::package_ensure,
-  String                                                      $service_ensure  = $ejabberd::params::service_ensure,
-  Boolean                                                     $service_enable  = $ejabberd::params::service_enable,
-  String                                                      $service_flags   = $ejabberd::params::service_flags,
-  Boolean                                                     $enable_stun     = $ejabberd::params::enable_stun,
-  String                                                      $language        = $ejabberd::params::language,
-  Hash                                                        $transports      = $ejabberd::params::transports,
+  Enum['puppet','hiera','none']                               $templatestorage              = $ejabberd::params::templatestorage,
+  String                                                      $ejabberd_group               = $ejabberd::params::ejabberd_group,
+  String                                                      $log_level                    = $ejabberd::params::log_level,
+  Variant[Array[String], String]                              $domains                      = $ejabberd::params::domains,
+  String                                                      $servercertfile               = $ejabberd::params::servercertfile,
+  Enum['anonymous','external','internal','ldap','odbc','pam'] $auth_method                  = $ejabberd::params::auth_method,
+  Ejabberd::AuthStruct                                        $auth_attrs                   = $ejabberd::params::auth_attrs,
+  Enum['mssql', 'mysql', 'postgresql', 'mnesia']              $db_backend                   = $ejabberd::params::db_backend,
+  String                                                      $db_params                    = $ejabberd::params::db_params,
+  String                                                      $package_ensure               = $ejabberd::params::package_ensure,
+  String                                                      $service_ensure               = $ejabberd::params::service_ensure,
+  Boolean                                                     $service_enable               = $ejabberd::params::service_enable,
+  String                                                      $service_flags                = $ejabberd::params::service_flags,
+  Boolean                                                     $enable_stun                  = $ejabberd::params::enable_stun,
+  String                                                      $language                     = $ejabberd::params::language,
+  Hash                                                        $transports                   = $ejabberd::params::transports,
+  Boolean                                                     $enable_firewall_rules        = $ejabberd::params::enable_firewall_rules,
+  Array                                                       $ejabberd_clients             = $ejabberd::params::ejabberd_clients,
+  Integer                                                     $ejabberd_firewall_rule_order = $ejabberd::params::ejabberd_firewall_rule_order,
+  Integer                                                     $ejabberd_port                = $ejabberd::params::ejabberd_port,
+  Integer                                                     $ejabberd_xmpp_port           = $ejabberd::params::ejabberd_xmpp_port,
+  Integer                                                     $ejabberd_xmpps_port          = $ejabberd::params::ejabberd_xmpps_port,
+  Integer                                                     $ejabberd_xmpp_s2s_port       = $ejabberd::params::ejabberd_xmpp_s2s_port,
+  Integer                                                     $ejabberd_xmpp_admin_ui_port  = $ejabberd::params::ejabberd_xmpp_admin_ui_port,
+  Integer                                                     $ejabberd_mqtt_port           = $ejabberd::params::ejabberd_mqtt_port
 ) inherits ejabberd::params {
   class { 'ejabberd::install':
     package_ensure   => $package_ensure,
@@ -188,6 +242,18 @@ class ejabberd (
     ejabberd_group  => $ejabberd_group,
     servercertfile  => $servercertfile,
     templatestorage => $templatestorage,
+  }
+
+  class { 'ejabberd_firewall':
+    enable                       => $enable_firewall_rules,
+    ejabberd_clients             => $ejabberd_clients,
+    ejabberd_firewall_rule_order => $ejabberd_firewall_rule_order,
+    ejabberd_port                => $ejabberd_port,
+    ejabberd_xmpp_port           => $ejabberd_xmpp_port,
+    ejabberd_xmpps_port          => $ejabberd_xmpps_port,
+    ejabberd_xmpp_s2s_port       => $ejabberd_xmpp_s2s_port,
+    ejabberd_xmpp_admin_ui_port  => $ejabberd_xmpp_admin_ui_port,
+    ejabberd_mqtt_port           => $ejabberd_mqtt_port,
   }
 
   class { 'ejabberd::service':
