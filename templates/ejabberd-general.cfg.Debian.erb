@@ -46,10 +46,10 @@ define_macro:
   'TLS_OPTIONS':
 <% if @tls_options.is_a? Array -%>
 <%- @tls_options.each do |option| -%>
-  - <%= option %>
+    - "<%= option %>"
 <%- end -%>
 <%- else -%>
-  - <%= tls_options %>
+    - "<%= tls_options %>"
 <% end -%>
     # 'DH_FILE': "/path/to/dhparams.pem"
     # generated with: openssl dhparam -out dhparams.pem 2048
