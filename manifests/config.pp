@@ -25,6 +25,11 @@
 #   Description: Domains served by ejabberd. Can be a single domain as a String
 #                or a list of domains as an array of Strings
 #
+# @param tls_options
+#   Type: Variant[Array[String], String]
+#   Default Value: defined by calling class
+#   Description: TLS Options for ejabberd
+#
 # @param servercertfile
 #   Type: String
 #   Default Value: defined by calling class
@@ -100,6 +105,7 @@ class ejabberd::config (
   String                                                      $log_level,
   Integer                                                     $log_rotate_count,
   Variant[Array[String], String]                              $domains,
+  Variant[Array[String], String]                              $tls_options,
   String                                                      $servercertfile,
   Enum['anonymous','external','internal','ldap','odbc','pam'] $auth_method,
   Ejabberd::AuthStruct                                        $auth_attrs,

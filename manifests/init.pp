@@ -68,6 +68,11 @@
 #   Description: Domains served by ejabberd. Can be a single domain as a String
 #                or a list of domains as an array of Strings
 #
+# @param tls_options
+#   Type: Variant[Array[String], String]
+#   Default Value: ['no_sslv3','no_tlsv1','no_tlsv1_1','cipher_server_preference','no_compression']
+#   Description: TLS Options for ejabberd
+#
 # @param auth_method
 #   Type: Enum['anonymous','external','internal','ldap','sql','pam','jwt']
 #   Default Value: 'internal'
@@ -206,6 +211,7 @@ class ejabberd (
   String                                                      $log_level                    = $ejabberd::params::log_level,
   Optional[Integer]                                           $log_rotate_count             = $ejabberd::params::log_rotate_count,
   Variant[Array[String], String]                              $domains                      = $ejabberd::params::domains,
+  Variant[Array[String], String]                              $tls_options                  = $ejabberd::params::tls_options,
   String                                                      $servercertfile               = $ejabberd::params::servercertfile,
   Enum['anonymous','external','internal','ldap','odbc','pam'] $auth_method                  = $ejabberd::params::auth_method,
   Ejabberd::AuthStruct                                        $auth_attrs                   = $ejabberd::params::auth_attrs,
@@ -245,6 +251,7 @@ class ejabberd (
     language       => $language,
     transports     => $transports,
     log_rotate_count => $log_rotate_count,
+    tls_options      => $tls_options,
   }
 
   class { 'ejabberd::certificate':

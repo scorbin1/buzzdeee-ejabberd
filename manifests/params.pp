@@ -16,6 +16,7 @@ class ejabberd::params {
     }
   }
 
+  $tls_options                  = ['no_sslv3','no_tlsv1','no_tlsv1_1','cipher_server_preference','no_compression']
   $enable_firewall_rules        = false
   $ejabberd_allowed_clients             = ['0.0.0.0/0']
   $ejabberd_firewall_rule_order = 119
