@@ -52,7 +52,7 @@
 class ejabberd::firewall (
   Boolean $enable,
   Array   $ejabberd_clients,
-  String  $ejabberd_firewall_rule_order,
+  Integer $ejabberd_firewall_rule_order,
   Integer $ejabberd_port,
   Integer $ejabberd_xmpp_port,
   Integer $ejabberd_xmpps_port,

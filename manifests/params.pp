@@ -16,7 +16,7 @@ class ejabberd::params {
 
   $enable_firewall_rules        = false
   $ejabberd_clients             = ['0.0.0.0/0']
-  $ejabberd_firewall_rule_order = '119'
+  $ejabberd_firewall_rule_order = 119
   $ejabberd_port                = 5443
   $ejabberd_xmpp_port           = 5222
   $ejabberd_xmpps_port          = 5223
