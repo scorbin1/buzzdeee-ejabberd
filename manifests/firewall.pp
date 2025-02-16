@@ -9,7 +9,7 @@
 #   Default Value: defined by calling class
 #   Description: Whether to enable firewall rule definition or not
 #
-# @param ejabberd_clients
+# @param ejabberd_allowed_clients
 #   Type: Array
 #   Default Value: defined by calling class
 #   Description: 
@@ -51,7 +51,7 @@
 #
 class ejabberd::firewall (
   Boolean $enable,
-  Array   $ejabberd_clients,
+  Array   $ejabberd_allowed_clients,
   Integer $ejabberd_firewall_rule_order,
   Integer $ejabberd_port,
   Integer $ejabberd_xmpp_port,
@@ -63,11 +63,11 @@ class ejabberd::firewall (
   if $enable {
     if defined(Class['Firewall']) {
       ## Setup firewall for ejabberd server
-      each($ejabberd_clients) |$client| {
+      each($ejabberd_allowed_clients) |$client| {
         if ( $client == '0.0.0.0/0' ) {
           ## ToDo: Can this be implemented by turning array into comma seperated string instead of individual rules?
           # ejabberd server - TCP 5443
-          firewall { "${ejabberd_firewall_rule_order} traffic to ejabberd server from ${client}":
+          firewall { "${ejabberd_firewall_rule_order} ejabberd server from ${client}":
             chain => 'INPUT',
             dport => $ejabberd_port,
             proto => 'tcp',
@@ -75,7 +75,7 @@ class ejabberd::firewall (
           }
 
           # ejabberd - xmpp - TCP 5222
-          firewall { "${ejabberd_firewall_rule_order} xmpp traffic to ejabberd from ${client}":
+          firewall { "${ejabberd_firewall_rule_order} ejabberd xmpp from ${client}":
             chain => 'INPUT',
             dport => $ejabberd_xmpp_port,
             proto => 'tcp',
@@ -83,7 +83,7 @@ class ejabberd::firewall (
           }
 
           # ejabberd - xmpps - TCP 5223
-          firewall { "${ejabberd_firewall_rule_order} xmpps traffic to ejabberd from ${client}":
+          firewall { "${ejabberd_firewall_rule_order} ejabberd xmpps from ${client}":
             chain => 'INPUT',
             dport => $ejabberd_xmpps_port,
             proto => 'tcp',
@@ -91,7 +91,7 @@ class ejabberd::firewall (
           }
 
           # ejabberd - xmpp_s2s - TCP 5269
-          firewall { "${ejabberd_firewall_rule_order} xmpp_s2s traffic to ejabberd from ${client}":
+          firewall { "${ejabberd_firewall_rule_order} ejabberd xmpp_s2s from ${client}":
             chain => 'INPUT',
             dport => $ejabberd_xmpp_s2s_port,
             proto => 'tcp',
@@ -99,7 +99,7 @@ class ejabberd::firewall (
           }
 
           # ejabberd - xmpp_admin_ui - TCP 5280
-          firewall { "${ejabberd_firewall_rule_order} xmpp_admin_ui traffic to ejabberd from ${client}":
+          firewall { "${ejabberd_firewall_rule_order} ejabberd admin ui from ${client}":
             chain => 'INPUT',
             dport => $ejabberd_xmpp_admin_ui_port,
             proto => 'tcp',
@@ -107,7 +107,7 @@ class ejabberd::firewall (
           }
 
           # ejabberd - mqtt - TCP 1883
-          firewall { "${ejabberd_firewall_rule_order} mqtt traffic to ejabberd from ${client}":
+          firewall { "${ejabberd_firewall_rule_order} ejabberd mqtt from ${client}":
             chain => 'INPUT',
             dport => $ejabberd_mqtt_port,
             proto => 'tcp',
@@ -117,7 +117,7 @@ class ejabberd::firewall (
         else {
           ## ToDo: Can this be implemented by turning array into comma seperated string instead of individual rules?
           # ejabberd server - TCP 5443
-          firewall { "${ejabberd_firewall_rule_order} traffic to ejabberd server from ${client}":
+          firewall { "${ejabberd_firewall_rule_order} ejabberd server from ${client}":
             chain  => 'INPUT',
             dport  => $ejabberd_port,
             proto  => 'tcp',
@@ -126,7 +126,7 @@ class ejabberd::firewall (
           }
 
           # ejabberd - xmpp - TCP 5222
-          firewall { "${ejabberd_firewall_rule_order} xmpp traffic to ejabberd from ${client}":
+          firewall { "${ejabberd_firewall_rule_order} ejabberd xmpp from ${client}":
             chain  => 'INPUT',
             dport  => $ejabberd_xmpp_port,
             proto  => 'tcp',
@@ -135,7 +135,7 @@ class ejabberd::firewall (
           }
 
           # ejabberd - xmpps - TCP 5223
-          firewall { "${ejabberd_firewall_rule_order} xmpps traffic to ejabberd from ${client}":
+          firewall { "${ejabberd_firewall_rule_order} ejabberd xmpps from ${client}":
             chain  => 'INPUT',
             dport  => $ejabberd_xmpps_port,
             proto  => 'tcp',
@@ -144,7 +144,7 @@ class ejabberd::firewall (
           }
 
           # ejabberd - xmpp_s2s - TCP 5269
-          firewall { "${ejabberd_firewall_rule_order} xmpp_s2s traffic to ejabberd from ${client}":
+          firewall { "${ejabberd_firewall_rule_order} ejabberd xmpp_s2s from ${client}":
             chain  => 'INPUT',
             dport  => $ejabberd_xmpp_s2s_port,
             proto  => 'tcp',
@@ -153,7 +153,7 @@ class ejabberd::firewall (
           }
 
           # ejabberd - xmpp_admin_ui - TCP 5280
-          firewall { "${ejabberd_firewall_rule_order} xmpp_admin_ui traffic to ejabberd from ${client}":
+          firewall { "${ejabberd_firewall_rule_order} ejabberd admin ui from ${client}":
             chain  => 'INPUT',
             dport  => $ejabberd_xmpp_admin_ui_port,
             proto  => 'tcp',
@@ -162,7 +162,7 @@ class ejabberd::firewall (
           }
 
           # ejabberd - mqtt - TCP 1883
-          firewall { "${ejabberd_firewall_rule_order} mqtt traffic to ejabberd from ${client}":
+          firewall { "${ejabberd_firewall_rule_order} ejabberd mqtt from ${client}":
             chain  => 'INPUT',
             dport  => $ejabberd_mqtt_port,
             proto  => 'tcp',

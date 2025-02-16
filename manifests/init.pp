@@ -127,7 +127,7 @@
 #   Default Value: false
 #   Description: If enabled and firewall enabled, configure rules for ejabberd
 #
-# @param ejabberd_clients
+# @param ejabberd_allowed_clients
 #   Type: Array
 #   Default value: ['0.0.0.0/0']
 #   An array of IPs permitted to access ejabberd
@@ -211,7 +211,7 @@ class ejabberd (
   String                                                      $language                     = $ejabberd::params::language,
   Hash                                                        $transports                   = $ejabberd::params::transports,
   Boolean                                                     $enable_firewall_rules        = $ejabberd::params::enable_firewall_rules,
-  Array                                                       $ejabberd_clients             = $ejabberd::params::ejabberd_clients,
+  Array                                                       $ejabberd_allowed_clients             = $ejabberd::params::ejabberd_allowed_clients,
   Integer                                                     $ejabberd_firewall_rule_order = $ejabberd::params::ejabberd_firewall_rule_order,
   Integer                                                     $ejabberd_port                = $ejabberd::params::ejabberd_port,
   Integer                                                     $ejabberd_xmpp_port           = $ejabberd::params::ejabberd_xmpp_port,
@@ -246,7 +246,7 @@ class ejabberd (
 
   class { 'ejabberd::firewall':
     enable                       => $enable_firewall_rules,
-    ejabberd_clients             => $ejabberd_clients,
+    ejabberd_allowed_clients     => $ejabberd_allowed_clients,
     ejabberd_firewall_rule_order => $ejabberd_firewall_rule_order,
     ejabberd_port                => $ejabberd_port,
     ejabberd_xmpp_port           => $ejabberd_xmpp_port,
