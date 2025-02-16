@@ -21,4 +21,20 @@ class ejabberd::install (
   package { 'ejabberd':
     ensure => $package_ensure,
   }
+
+  package { 'ejabberd-mod-muc-log-http':
+    ensure => $package_ensure,
+  }
+
+  package { 'ejabberd-mod-pottymouth':
+    ensure => $package_ensure,
+  }
+
+  package { 'ejabberd-mod-s2s-log':
+    ensure => $package_ensure,
+  }
+
+  package { 'ejabberd-mod-webpresence':
+    ensure => $package_ensure,
+  }
 }
