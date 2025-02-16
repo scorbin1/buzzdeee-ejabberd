@@ -131,17 +131,19 @@ class ejabberd::config (
     order   => '20',
   }
 
-  concat::fragment { 'ejabberd-authentication':
-    target  => $ejabberd::config_filename,
-    content => template("ejabberd/ejabberd-auth-${auth_method}.cfg${ejabberd::config_set}.erb"),
-    order   => '30',
-  }
-
-  if $db_backend != 'mnesia' {
-    concat::fragment { 'ejabberd-database':
+  if $facts['os']['family'] != 'Debian' {
+    concat::fragment { 'ejabberd-authentication':
       target  => $ejabberd::config_filename,
-      content => template("ejabberd/ejabberd-db-${db_backend}.cfg${ejabberd::config_set}.erb"),
+      content => template("ejabberd/ejabberd-auth-${auth_method}.cfg${ejabberd::config_set}.erb"),
       order   => '40',
+    }
+
+    if $db_backend != 'mnesia' {
+      concat::fragment { 'ejabberd-database':
+        target  => $ejabberd::config_filename,
+        content => template("ejabberd/ejabberd-db-${db_backend}.cfg${ejabberd::config_set}.erb"),
+        order   => '50',
+      }
     }
   }
 
