@@ -83,7 +83,7 @@ class ejabberd::firewall (
       }
 
       # ejabberd - xmpps - TCP 5223
-      firewall { "${ejabberd_firewall_rule_order} xmpp traffic to ejabberd":
+      firewall { "${ejabberd_firewall_rule_order} xmpps traffic to ejabberd":
         chain  => 'INPUT',
         port   => $ejabberd_xmpps_port,
         proto  => 'tcp',
