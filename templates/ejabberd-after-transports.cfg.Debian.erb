@@ -1,0 +1,32 @@
+<%- if @enable_stun -%>
+  -
+    port: 3478
+    ip: "::"
+    transport: udp
+    module: ejabberd_stun
+    use_turn: true
+    ## The server's public IPv4 address:
+    # turn_ipv4_address: "203.0.113.3"
+    ## The server's public IPv6 address:
+    # turn_ipv6_address: "2001:db8::3"
+<%- end -%>
+  -
+    port: 1883
+    ip: "::"
+    module: mod_mqtt
+    backlog: 1000
+
+
+## Disabling digest-md5 SASL authentication. digest-md5 requires plain-text
+## password storage (see auth_password_format option).
+disable_sasl_mechanisms:
+  - "digest-md5"
+  - "X-OAUTH2"
+
+s2s_use_starttls: required
+
+## Store the plain passwords or hashed for SCRAM:
+auth_password_format: scram
+
+## Full path to a script that generates the image.
+## captcha_cmd: "/usr/share/ejabberd/captcha.sh"

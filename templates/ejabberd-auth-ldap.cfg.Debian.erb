@@ -1,0 +1,59 @@
+%%%.   ==============
+%%%'   AUTHENTICATION
+
+%%
+%% Authentication using LDAP
+%%
+{auth_method, ldap}.
+%%
+%% List of LDAP servers:
+<% if @auth_attrs['servers'].is_a? Array -%>
+{ldap_servers, [
+<%- @auth_attrs['servers'].each do |server| -%>
+	"<%= server %>",
+<%- end -%>
+	]}.
+<%- else -%>
+{ldap_servers, ["<%= @auth_attrs['servers'] %>"]}.
+<% end -%>
+%%
+%% Encryption of connection to LDAP servers:
+%%{ldap_encrypt, none}.
+%%{ldap_encrypt, tls}.
+{ldap_encrypt, <%= @auth_attrs['encrypt'] %>}.
+%%
+%% Port to connect to on LDAP servers:
+%%{ldap_port, 389}.
+%%{ldap_port, 636}.
+{ldap_port, <%= @auth_attrs['port'] %>}.
+%%
+%% LDAP manager:
+{ldap_rootdn, "<%= @auth_attrs['rootdn'] %>"}.
+%%
+%% Password of LDAP manager:
+{ldap_password, "<%= @auth_attrs['password'] %>"}.
+%%
+%% Search base of LDAP directory:
+{ldap_base, "<%= @auth_attrs['searchbase'] %>"}.
+%%
+%% LDAP attribute that holds user ID:
+%%{ldap_uids, [{"mail", "%u@mail.example.org"}]}.
+{ldap_uids, [{ "<%= @auth_attrs['uidattr'] %>"}]}.
+%%
+%% LDAP filter:
+%%{ldap_filter, "(objectClass=shadowAccount)"}.
+{ldap_filter, "<%= @auth_attrs['ldapfilter'] %>"}.
+
+%%
+%% Anonymous login support:
+%%   auth_method: anonymous
+%%   anonymous_protocol: sasl_anon | login_anon | both
+%%   allow_multiple_connections: true | false
+%%
+%%{host_config, "public.example.org", [{auth_method, anonymous},
+%%                                     {allow_multiple_connections, false},
+%%                                     {anonymous_protocol, sasl_anon}]}.
+%%
+%% To use both anonymous and internal authentication:
+%%
+%%{host_config, "public.example.org", [{auth_method, [internal, anonymous]}]}.

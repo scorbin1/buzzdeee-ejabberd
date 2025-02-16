@@ -1,0 +1,15 @@
+%%%.   ==============
+%%%'   DATABASE SETUP
+
+%% ejabberd by default uses the internal Mnesia database,
+%% so you do not necessarily need this section.
+%% This section provides configuration examples in case
+%% you want to use other database backends.
+%% Please consult the ejabberd Guide for details on database creation.
+
+%%
+%% MySQL server:
+%%
+{odbc_server, {mysql, "<%= @mydbserver %>", <%= @mydbport %>, "<%= @mydbname %>", "<%= @mydbuser %>", "<%= @mydbpw %>"}}.
+%%
+
