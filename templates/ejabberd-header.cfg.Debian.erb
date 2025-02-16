@@ -60,12 +60,6 @@ s2s_protocol_options: 'TLS_OPTIONS'
 # c2s_dhfile: 'DH_FILE'
 # s2s_dhfile: 'DH_FILE'
 
-##   ===============
-##   LISTENING PORTS
-##
-## listen: The ports ejabberd will listen on, which service each is handled
-## by and what options to start it with.
-##
 listen:
   -
     port: 5222
@@ -112,3 +106,4 @@ listen:
       /admin: ejabberd_web_admin
       /.well-known/acme-challenge: ejabberd_acme
       /register: mod_register_web
+      
