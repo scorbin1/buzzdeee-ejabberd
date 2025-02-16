@@ -31,8 +31,8 @@ define ejabberd::transport (
   String                         $password,
 ) {
   concat::fragment { "ejabberd-transport-${title}":
-    content => template('ejabberd/ejabberd-transport.cfg.erb'),
     target  => $ejabberd::config_filename,
+    content => template("ejabberd/ejabberd-transport.cfg.${ejabberd::config_set}.erb"),
     order   => '10',
   }
 }

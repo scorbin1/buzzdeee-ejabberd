@@ -8,11 +8,13 @@ class ejabberd::params {
     'Debian': {
       $ejabberd_group = 'ejabberd'
       $config_filename = '/etc/ejabberd/ejabberd.yml'
+      $config_set      = '.' + 'Debian'
     }
 
     default: {
       $ejabberd_group = '_ejabberd'
       $config_filename = '/etc/ejabberd/ejabberd.cfg'
+      $config_set      = ''
     }
   }
 

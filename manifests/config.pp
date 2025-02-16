@@ -116,8 +116,8 @@ class ejabberd::config (
   }
 
   concat::fragment { 'ejabberd-header':
-    content => template('ejabberd/ejabberd-header.cfg.erb'),
     target  => $ejabberd::config_filename,
+    content => template("ejabberd/ejabberd-header.cfg.${ejabberd::config_set}.erb"),
     order   => '01',
   }
 
@@ -126,40 +126,40 @@ class ejabberd::config (
   }
 
   concat::fragment { 'ejabberd-after-transports':
-    content => template('ejabberd/ejabberd-after-transports.cfg.erb'),
     target  => $ejabberd::config_filename,
+    content => template("ejabberd/ejabberd-after-transports.cfg${ejabberd::config_set}.erb"),
     order   => '20',
   }
 
   concat::fragment { 'ejabberd-authentication':
-    content => template("ejabberd/ejabberd-auth-${auth_method}.cfg.erb"),
     target  => $ejabberd::config_filename,
+    content => template("ejabberd/ejabberd-auth-${auth_method}.cfg${ejabberd::config_set}.erb"),
     order   => '30',
   }
 
   if $db_backend != 'mnesia' {
     concat::fragment { 'ejabberd-database':
-      content => template("ejabberd/ejabberd-db-${db_backend}.cfg.erb"),
       target  => $ejabberd::config_filename,
+      content => template("ejabberd/ejabberd-db-${db_backend}.cfg${ejabberd::config_set}.erb"),
       order   => '40',
     }
   }
 
   concat::fragment { 'ejabberd-after-database':
-    content => template('ejabberd/ejabberd-after-dbconfig.cfg.erb'),
     target  => $ejabberd::config_filename,
+    content => template("ejabberd/ejabberd-after-dbconfig.cfg${ejabberd::config_set}.erb"),
     order   => '50',
   }
 
   concat::fragment { 'ejabberd-acls':
-    content => template('ejabberd/ejabberd-acls.cfg.erb'),
     target  => $ejabberd::config_filename,
+    content => template("ejabberd/ejabberd-acls.cfg${ejabberd::config_set}.erb"),
     order   => '60',
   }
 
   concat::fragment { 'ejabberd-end':
-    content => template('ejabberd/ejabberd-end.cfg.erb'),
     target  => $ejabberd::config_filename,
+    content => template("ejabberd/ejabberd-end.cfg${ejabberd::config_set}.erb"),
     order   => '70',
   }
 }
