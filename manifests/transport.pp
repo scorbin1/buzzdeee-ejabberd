@@ -24,6 +24,17 @@
 #   Default Value: defined by calling class
 #   Description: password
 #
+case $facts['os']['family'] {
+  'Debian': {
+    $config_filename = '/etc/ejabberd/ejabberd.yml'
+    $config_set      = '.Debian'
+  }
+
+  default: {
+    $config_filename = '/etc/ejabberd/ejabberd.cfg'
+    $config_set      = ''
+  }
+}
 
 define ejabberd::transport (
   Integer                        $port,
@@ -32,7 +43,7 @@ define ejabberd::transport (
 ) {
   concat::fragment { "ejabberd-transport-${title}":
     target  => $ejabberd::config_filename,
-    content => template("ejabberd/ejabberd-transport.cfg.${ejabberd::config_set}.erb"),
+    content => template("ejabberd/ejabberd-transport.cfg.${config_set}.erb"),
     order   => '10',
   }
 }
