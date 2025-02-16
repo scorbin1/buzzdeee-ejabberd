@@ -135,19 +135,25 @@ class ejabberd::config (
     mode   => '0640',
   }
 
-  concat::fragment { 'ejabberd-header':
+  concat::fragment { 'ejabberd-general':
     target  => $config_filename,
-    content => template("ejabberd/ejabberd-header.cfg${config_set}.erb"),
+    content => template("ejabberd/ejabberd-general.cfg${config_set}.erb"),
     order   => '01',
+  }
+
+  concat::fragment { 'ejabberd-ports':
+    target  => $config_filename,
+    content => template("ejabberd/ejabberd-ports.cfg${config_set}.erb"),
+    order   => '02',
   }
 
   if $transports {
     create_resources(ejabberd::transport, $transports)
   }
 
-  concat::fragment { 'ejabberd-after-transports':
+  concat::fragment { 'ejabberd-encryption':
     target  => $config_filename,
-    content => template("ejabberd/ejabberd-after-transports.cfg${config_set}.erb"),
+    content => template("ejabberd/ejabberd-encryption.cfg${config_set}.erb"),
     order   => '20',
   }
 
@@ -173,15 +179,21 @@ class ejabberd::config (
     }
   }
 
-  concat::fragment { 'ejabberd-after-database':
+  concat::fragment { 'ejabberd-shaper':
     target  => $config_filename,
-    content => template("ejabberd/ejabberd-after-dbconfig.cfg${config_set}.erb"),
+    content => template("ejabberd/ejabberd-shaper.cfg${config_set}.erb"),
     order   => '60',
+  }
+
+  concat::fragment { 'ejabberd-modules':
+    target  => $config_filename,
+    content => template("ejabberd/ejabberd-modules.cfg${config_set}.erb"),
+    order   => '70',
   }
 
   concat::fragment { 'ejabberd-end':
     target  => $config_filename,
     content => template("ejabberd/ejabberd-end.cfg${config_set}.erb"),
-    order   => '70',
+    order   => '80',
   }
 }
