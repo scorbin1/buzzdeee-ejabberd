@@ -108,7 +108,7 @@ class ejabberd::config (
   String                                                      $language,
   String                                                      $ejabberd_group,
 ) {
-  concat { '/etc/ejabberd/ejabberd.cfg':
+  concat { $ejabberd::config_filename:
     ensure => 'present',
     owner  => 'root',
     group  => $ejabberd_group,
@@ -116,8 +116,8 @@ class ejabberd::config (
   }
 
   concat::fragment { 'ejabberd-header':
-    target  => '/etc/ejabberd/ejabberd.cfg',
     content => template('ejabberd/ejabberd-header.cfg.erb'),
+    target  => $ejabberd::config_filename,
     order   => '01',
   }
 
@@ -126,40 +126,40 @@ class ejabberd::config (
   }
 
   concat::fragment { 'ejabberd-after-transports':
-    target  => '/etc/ejabberd/ejabberd.cfg',
     content => template('ejabberd/ejabberd-after-transports.cfg.erb'),
+    target  => $ejabberd::config_filename,
     order   => '20',
   }
 
   concat::fragment { 'ejabberd-authentication':
-    target  => '/etc/ejabberd/ejabberd.cfg',
     content => template("ejabberd/ejabberd-auth-${auth_method}.cfg.erb"),
+    target  => $ejabberd::config_filename,
     order   => '30',
   }
 
   if $db_backend != 'mnesia' {
     concat::fragment { 'ejabberd-database':
-      target  => '/etc/ejabberd/ejabberd.cfg',
       content => template("ejabberd/ejabberd-db-${db_backend}.cfg.erb"),
+      target  => $ejabberd::config_filename,
       order   => '40',
     }
   }
 
   concat::fragment { 'ejabberd-after-database':
-    target  => '/etc/ejabberd/ejabberd.cfg',
     content => template('ejabberd/ejabberd-after-dbconfig.cfg.erb'),
+    target  => $ejabberd::config_filename,
     order   => '50',
   }
 
   concat::fragment { 'ejabberd-acls':
-    target  => '/etc/ejabberd/ejabberd.cfg',
     content => template('ejabberd/ejabberd-acls.cfg.erb'),
+    target  => $ejabberd::config_filename,
     order   => '60',
   }
 
   concat::fragment { 'ejabberd-end':
-    target  => '/etc/ejabberd/ejabberd.cfg',
     content => template('ejabberd/ejabberd-end.cfg.erb'),
+    target  => $ejabberd::config_filename,
     order   => '70',
   }
 }

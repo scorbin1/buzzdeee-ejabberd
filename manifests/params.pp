@@ -7,10 +7,12 @@ class ejabberd::params {
   case $facts['os']['family'] {
     'Debian': {
       $ejabberd_group = 'ejabberd'
+      $config_filename = '/etc/ejabberd/ejabberd.yml'
     }
 
     default: {
       $ejabberd_group = '_ejabberd'
+      $config_filename = '/etc/ejabberd/ejabberd.cfg'
     }
   }
 
