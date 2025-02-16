@@ -14,7 +14,7 @@ class ejabberd::params {
     }
   }
 
-  $log_level = '1'
+  $log_level = 'info'
   $domains = ['example.net', 'example.com', 'example.org']
   $servercertfile = '/etc/ejabberd/mycert.pem'
   $auth_method = 'ldap'
