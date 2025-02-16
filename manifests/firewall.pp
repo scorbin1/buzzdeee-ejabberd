@@ -67,7 +67,7 @@ class ejabberd::firewall (
       # ejabberd server - TCP 5443
       firewall { "${ejabberd_firewall_rule_order} traffic to ejabberd server":
         chain  => 'INPUT',
-        port   => $ejabberd_port,
+        dport   => $ejabberd_port,
         proto  => 'tcp',
         source => $ejabberd_clients,
         jump   => accept,
@@ -76,7 +76,7 @@ class ejabberd::firewall (
       # ejabberd - xmpp - TCP 5222
       firewall { "${ejabberd_firewall_rule_order} xmpp traffic to ejabberd":
         chain  => 'INPUT',
-        port   => $ejabberd_xmpp_port,
+        dport   => $ejabberd_xmpp_port,
         proto  => 'tcp',
         source => $ejabberd_clients,
         jump   => accept,
@@ -85,7 +85,7 @@ class ejabberd::firewall (
       # ejabberd - xmpps - TCP 5223
       firewall { "${ejabberd_firewall_rule_order} xmpps traffic to ejabberd":
         chain  => 'INPUT',
-        port   => $ejabberd_xmpps_port,
+        dport   => $ejabberd_xmpps_port,
         proto  => 'tcp',
         source => $ejabberd_clients,
         jump   => accept,
@@ -94,7 +94,7 @@ class ejabberd::firewall (
       # ejabberd - xmpp_s2s - TCP 5269
       firewall { "${ejabberd_firewall_rule_order} xmpp_s2s traffic to ejabberd":
         chain  => 'INPUT',
-        port   => $ejabberd_xmpp_s2s_port,
+        dport   => $ejabberd_xmpp_s2s_port,
         proto  => 'tcp',
         source => $ejabberd_clients,
         jump   => accept,
@@ -103,7 +103,7 @@ class ejabberd::firewall (
       # ejabberd - xmpp_admin_ui - TCP 5280
       firewall { "${ejabberd_firewall_rule_order} xmpp_admin_ui traffic to ejabberd":
         chain  => 'INPUT',
-        port   => $ejabberd_xmpp_admin_ui_port,
+        dport   => $ejabberd_xmpp_admin_ui_port,
         proto  => 'tcp',
         source => $ejabberd_clients,
         jump   => accept,
@@ -112,7 +112,7 @@ class ejabberd::firewall (
       # ejabberd - mqtt - TCP 1883
       firewall { "${ejabberd_firewall_rule_order} mqtt traffic to ejabberd":
         chain  => 'INPUT',
-        port   => $ejabberd_mqtt_port,
+        dport   => $ejabberd_mqtt_port,
         proto  => 'tcp',
         source => $ejabberd_clients,
         jump   => accept,
