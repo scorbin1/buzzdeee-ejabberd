@@ -129,7 +129,7 @@ class ejabberd::config (
 
   concat::fragment { 'ejabberd-header':
     target  => $config_filename,
-    content => template("ejabberd/ejabberd-header.cfg.${config_set}.erb"),
+    content => template("ejabberd/ejabberd-header.cfg${config_set}.erb"),
     order   => '01',
   }
 
