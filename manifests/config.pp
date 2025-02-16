@@ -131,6 +131,12 @@ class ejabberd::config (
     order   => '20',
   }
 
+  concat::fragment { 'ejabberd-acls':
+    target  => $ejabberd::config_filename,
+    content => template("ejabberd/ejabberd-acls.cfg${ejabberd::config_set}.erb"),
+    order   => '30',
+  }
+
   if $facts['os']['family'] != 'Debian' {
     concat::fragment { 'ejabberd-authentication':
       target  => $ejabberd::config_filename,
@@ -150,12 +156,6 @@ class ejabberd::config (
   concat::fragment { 'ejabberd-after-database':
     target  => $ejabberd::config_filename,
     content => template("ejabberd/ejabberd-after-dbconfig.cfg${ejabberd::config_set}.erb"),
-    order   => '50',
-  }
-
-  concat::fragment { 'ejabberd-acls':
-    target  => $ejabberd::config_filename,
-    content => template("ejabberd/ejabberd-acls.cfg${ejabberd::config_set}.erb"),
     order   => '60',
   }
 
