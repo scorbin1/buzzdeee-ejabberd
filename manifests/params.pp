@@ -7,10 +7,12 @@ class ejabberd::params {
   case $facts['os']['family'] {
     'Debian': {
       $ejabberd_group  = 'ejabberd'
+      $log_rotate_count = 0
     }
 
     default: {
       $ejabberd_group  = '_ejabberd'
+      $log_rotate_count = 1
     }
   }
 
