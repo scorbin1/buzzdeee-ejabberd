@@ -244,7 +244,7 @@ class ejabberd (
     templatestorage => $templatestorage,
   }
 
-  class { 'ejabberd_firewall':
+  class { 'ejabberd::firewall':
     enable                       => $enable_firewall_rules,
     ejabberd_clients             => $ejabberd_clients,
     ejabberd_firewall_rule_order => $ejabberd_firewall_rule_order,
