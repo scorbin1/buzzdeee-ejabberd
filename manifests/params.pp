@@ -27,7 +27,7 @@ class ejabberd::params {
   $log_level = 'info'
   $domains = ['example.net', 'example.com', 'example.org']
   $servercertfile = '/etc/ejabberd/mycert.pem'
-  $auth_method = 'ldap'
+  $auth_method = 'internal'
   $transports = {}
   $auth_attrs = {
     servers    => 'localhost',

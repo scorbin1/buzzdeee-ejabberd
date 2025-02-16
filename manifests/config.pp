@@ -25,16 +25,17 @@
 #   Description: Path to server certificate file
 #
 # @param auth_method
-#   Type: Enum['anonymous','external','internal','ldap','odbc','pam']
+#   Type: Enum['anonymous','external','internal','ldap','sql','pam','jwt']
 #   Default Value: defined by calling class
 #   Description: Login authentication mechanism to use with ejabberd
 #     Acceptable values:
 #       'anonymous' - Do not require authentication
-#       'external'  - Use external auth mechanism
-#       'internal'  - Use ejabberd to authenticate
+#       'external'  - Use external script to authentacte
+#       'internal'  - Use internal mnesia db to authenticate
 #       'ldap'      - Use an ldap backend to authenticate users
-#       'odbc'      - Use an odbc connection to authenticate users
+#       'sql'       - Use an sql db to authenticate users
 #       'pam'       - Use pam to authenticate users
+#       'jwt'       - Use jwt to authenticate users
 #
 # @param auth_attrs
 #   Type: Struct[{
