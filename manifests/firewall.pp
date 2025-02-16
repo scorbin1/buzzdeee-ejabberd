@@ -44,7 +44,7 @@
 #   Default Value: defined by calling class
 #   Description: TCP port for ejabberd xmpp admin ui
 #
-# @param mqtt_port
+# @param ejabberd_mqtt_port
 #   Type: Integer
 #   Default Value: defined by calling class
 #   Description: TCP port for ejabberd mqtt
@@ -58,7 +58,7 @@ class ejabberd::firewall (
   Integer $ejabberd_xmpps_port,
   Integer $ejabberd_xmpp_s2s_port,
   Integer $ejabberd_xmpp_admin_ui_port,
-  Integer $mqtt_port
+  Integer $ejabberd_mqtt_port
 ) {
   if $enable {
     if defined(Class['Firewall']) {
@@ -112,7 +112,7 @@ class ejabberd::firewall (
       # ejabberd - mqtt - TCP 1883
       firewall { "${ejabberd_firewall_rule_order} mqtt traffic to ejabberd":
         chain  => 'INPUT',
-        port   => $mqtt_port,
+        port   => $ejabberd_mqtt_port,
         proto  => 'tcp',
         source => $ejabberd_clients,
         jump   => accept,
