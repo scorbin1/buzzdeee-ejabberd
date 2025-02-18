@@ -47,10 +47,10 @@ modules:
 <% if @enable_mod_ping %>
   mod_ping: 
     send_pings: true
-<% unless @mod_ping_ack_timeout.empty? %>
+<% unless @mod_ping_ack_timeout == 0 %>
     ping_ack_timeout: <%= @mod_ping_ack_timeout %>
 <% end %>
-<% unless @mod_ping_interval.empty? %>
+<% unless @mod_ping_interval == 0 %>
     ping_interval: <%= @mod_ping_interval %>
 <% end %>
 <% unless @mod_ping_timeout_action == 'none' %>
