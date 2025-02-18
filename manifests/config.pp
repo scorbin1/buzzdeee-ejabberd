@@ -101,6 +101,21 @@
 #   Default Value: defined by calling class
 #   Description: The group that owns the 
 #
+# @param mod_register_ips
+#   Type: String
+#   Default Value: defined by calling class
+#   Description: IP addresses allowed to register using mod_register
+#
+# @param mod_register_subject
+#   Type: String
+#   Default Value: defined by calling class
+#   Description: Custom subject line for mod_register
+#
+# @param mod_register_body
+#   Type: String
+#   Default Value: defined by calling class
+#   Description: Custom body for mod_register
+#
 class ejabberd::config (
   String                                                      $log_level,
   Integer                                                     $log_rotate_count,
@@ -115,6 +130,9 @@ class ejabberd::config (
   Optional[String]                                            $db_params,
   String                                                      $language,
   String                                                      $ejabberd_group,
+  String                                                      $mod_register_ips,
+  String                                                      $mod_register_subject,
+  String                                                      $mod_register_body,
 ) {
   case $facts['os']['family'] {
     'Debian': {

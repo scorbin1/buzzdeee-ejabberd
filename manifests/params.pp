@@ -53,4 +53,7 @@ class ejabberd::params {
   $service_enable = true
   $service_flags = ''
   $pidfile = '/var/run/ejabberd/ejabberd.pid'
+  $mod_register_ips = ''
+  $mod_register_subject = ''
+  $mod_register_body = ''
 }

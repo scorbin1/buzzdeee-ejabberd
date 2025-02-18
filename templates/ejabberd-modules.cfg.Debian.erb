@@ -67,18 +67,34 @@ modules:
         access_model: whitelist
   mod_push: {}
   mod_push_keepalive: {}
+<% if @mod_register_ips or @mod_register_subject or @mod_register_body %>
   mod_register:
     ## Only accept registration requests from the "trusted"
     ## network (see access_rules section above).
     ## Think twice before enabling registration from any
     ## address. See the Jabber SPAM Manifesto for details:
     ## https://github.com/ge0rg/jabber-spam-fighting-manifesto
-    ip_access: all
+<%- else -%>
+  ## mod_register:
+  ##   ## Only accept registration requests from the "trusted"
+  ##   ## network (see access_rules section above).
+  ##   ## Think twice before enabling registration from any
+  ##   ## address. See the Jabber SPAM Manifesto for details:
+  ##   ## https://github.com/ge0rg/jabber-spam-fighting-manifesto
+  ##   ip_access: trusted_network
+<% end %>
+<% if @mod_register_ips  %>
+    ip_access: <%= @mod_register_ips %>
+<% end %>
+<% if @mod_register_subject or @mod_register_body %>
     welcome_message:
-      subject: "Welcome!"
-      body: |-
-        Hi!
-        Welcome to this XMPP server
+<% end %>
+<% if @mod_register_subject %>
+      subject: "<%= @mod_register_subject %>"
+<% end %>
+<% if @mod_register_body %>
+      body: <%= @mod_register_body %>
+<% end %>
   mod_roster:
     versioning: true
 ##  mod_s2s_dialback: {}

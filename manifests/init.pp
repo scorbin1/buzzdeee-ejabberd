@@ -179,6 +179,21 @@
 #   Default value: '1883'
 #   ejabberd mqtt service port.
 #
+# @param mod_register_ips
+#   Type: String
+#   Default Value: undef
+#   Description: IP addresses allowed to register using mod_register
+#
+# @param mod_register_subject
+#   Type: String
+#   Default Value: undef
+#   Description: Custom subject line for mod_register
+#
+# @param mod_register_body
+#   Type: String
+#   Default Value: undef
+#   Description: Custom body for mod_register
+#
 # === Examples
 #
 #  class { 'ejabberd':
@@ -232,7 +247,10 @@ class ejabberd (
   Integer                                                     $ejabberd_xmpps_port          = $ejabberd::params::ejabberd_xmpps_port,
   Integer                                                     $ejabberd_xmpp_s2s_port       = $ejabberd::params::ejabberd_xmpp_s2s_port,
   Integer                                                     $ejabberd_xmpp_admin_ui_port  = $ejabberd::params::ejabberd_xmpp_admin_ui_port,
-  Integer                                                     $ejabberd_mqtt_port           = $ejabberd::params::ejabberd_mqtt_port
+  Integer                                                     $ejabberd_mqtt_port           = $ejabberd::params::ejabberd_mqtt_port,
+  String                                                      $mod_register_ips             = $ejabberd::params::mod_register_ips,
+  String                                                      $mod_register_subject         = $ejabberd::params::mod_register_subject,
+  String                                                      $mod_register_body            = $ejabberd::params::mod_register_body,
 ) inherits ejabberd::params {
   class { 'ejabberd::install':
     package_ensure   => $package_ensure,
