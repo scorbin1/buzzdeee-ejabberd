@@ -43,21 +43,12 @@ modules:
   mod_muc_admin: {}
   mod_offline:
     access_max_user_messages: max_user_offline_messages
-<%- if @enable_mod_ping -%>
-  mod_ping: 
+<%- if @enable_mod_ping -%>  mod_ping: 
     send_pings: true
-<%- unless @mod_ping_ack_timeout == 0 -%>
-    ping_ack_timeout: <%= @mod_ping_ack_timeout %>
-<%- end -%>
-<%- unless @mod_ping_interval == 0 -%>
-    ping_interval: <%= @mod_ping_interval %>
-<%- end -%>
-<%- unless @mod_ping_timeout_action == 'none' -%>
-    timeout_action: <%= @mod_ping_timeout_action %>
-<%- end -%>
-<%- else -%>
-  mod_ping: {}
-<%- end -%>
+<%- unless @mod_ping_ack_timeout == 0 -%>    ping_ack_timeout: <%= @mod_ping_ack_timeout %><%- end -%>
+<%- unless @mod_ping_interval == 0 -%>    ping_interval: <%= @mod_ping_interval %><%- end -%>
+<%- unless @mod_ping_timeout_action == 'none' -%>    timeout_action: <%= @mod_ping_timeout_action %><%- end -%>
+<%- else -%>  mod_ping: {}<%- end -%>
   mod_pres_counter:
     count: 20
     interval: 60
@@ -67,11 +58,9 @@ modules:
   mod_proxy65:
     access: <%= @mod_proxy65_access %>
     max_connections: <%= @mod_proxy65_connections %>
-<%- else -%>
-  ## mod_proxy65:
+<%- else -%>  ## mod_proxy65:
   ##   access: local
-  ##   max_connections: 5
-<%- end -%>
+  ##   max_connections: 5<%- end -%>
   mod_pubsub:
     access_createnode: pubsub_createnode
     plugins:
@@ -99,20 +88,11 @@ modules:
   ##   ## Think twice before enabling registration from any
   ##   ## address. See the Jabber SPAM Manifesto for details:
   ##   ## https://github.com/ge0rg/jabber-spam-fighting-manifesto
-  ##   ip_access: trusted_network
-<%- end -%>
-<%- unless @mod_register_ips.empty? -%>
-    ip_access: <%= @mod_register_ips %>
-<%- end -%>
-<%- unless @mod_register_subject.empty? and @mod_register_body.empty? -%>
-    welcome_message:
-<%- end -%>
-<%- unless @mod_register_subject.empty? -%>
-      subject: "<%= @mod_register_subject %>"
-<%- end -%>
-<%- unless @mod_register_body.empty? -%>
-      body: <%= @mod_register_body %>
-<%- end -%>
+  ##   ip_access: trusted_network<%- end -%>
+<%- unless @mod_register_ips.empty? -%>    ip_access: <%= @mod_register_ips %><%- end -%>
+<%- unless @mod_register_subject.empty? and @mod_register_body.empty? -%>    welcome_message:<%- end -%>
+<%- unless @mod_register_subject.empty? -%>      subject: "<%= @mod_register_subject %>"<%- end -%>
+<%- unless @mod_register_body.empty? -%>      body: <%= @mod_register_body %><%- end -%>
   mod_roster:
     versioning: true
   mod_s2s_dialback: {}
