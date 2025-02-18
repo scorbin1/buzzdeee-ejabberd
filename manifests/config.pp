@@ -116,6 +116,21 @@
 #   Default Value: defined by calling class
 #   Description: Custom body for mod_register
 #
+# @param enable_mod_proxy65
+#   Type: Boolean
+#   Default Value: defined by calling class
+#   Description: Whether to enable proxy65 module
+#
+# @param mod_proxy65_access
+#   Type: String
+#   Default Value: defined by calling class
+#   Description: Custom body for mod_register
+#
+# @param mod_proxy65_connections
+#   Type: Integer
+#   Default Value: defined by calling class
+#   Description: Custom body for mod_register
+#
 class ejabberd::config (
   String                                                      $log_level,
   Integer                                                     $log_rotate_count,
@@ -133,6 +148,9 @@ class ejabberd::config (
   String                                                      $mod_register_ips,
   String                                                      $mod_register_subject,
   String                                                      $mod_register_body,
+  Boolean                                                     $enable_mod_proxy65,
+  String                                                      $mod_proxy65_access,
+  Integer                                                     $mod_proxy65_connections,
 ) {
   case $facts['os']['family'] {
     'Debian': {

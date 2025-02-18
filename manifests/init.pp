@@ -194,6 +194,21 @@
 #   Default Value: undef
 #   Description: Custom body for mod_register
 #
+# @param enable_mod_proxy65
+#   Type: Boolean
+#   Default Value: false
+#   Description: Whether to enable proxy65 module
+#
+# @param mod_proxy65_access
+#   Type: String
+#   Default Value: undef
+#   Description: Custom body for mod_register
+#
+# @param mod_proxy65_connections
+#   Type: String
+#   Default Value: undef
+#   Description: Custom body for mod_register
+#
 # === Examples
 #
 #  class { 'ejabberd':
@@ -251,6 +266,9 @@ class ejabberd (
   String                                                      $mod_register_ips             = $ejabberd::params::mod_register_ips,
   String                                                      $mod_register_subject         = $ejabberd::params::mod_register_subject,
   String                                                      $mod_register_body            = $ejabberd::params::mod_register_body,
+  Boolean                                                     $enable_mod_proxy65           = $ejabberd::params::enable_mod_proxy65,
+  String                                                      $mod_proxy65_access           = $ejabberd::params::mod_proxy65_access,
+  Integer                                                     $mod_proxy65_connections      = $ejabberd::params::mod_proxy65_connections,
 ) inherits ejabberd::params {
   class { 'ejabberd::install':
     package_ensure   => $package_ensure,
@@ -273,6 +291,9 @@ class ejabberd (
     mod_register_ips        => $mod_register_ips,
     mod_register_subject    => $mod_register_subject,
     mod_register_body       => $mod_register_body,
+    enable_mod_proxy65      => $enable_mod_proxy65,
+    mod_proxy65_access      => $mod_proxy65_access,
+    mod_proxy65_connections => $mod_proxy65_connections,
   }
 
   class { 'ejabberd::certificate':

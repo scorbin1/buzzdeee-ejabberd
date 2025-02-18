@@ -44,16 +44,19 @@ class ejabberd::params {
     password   => 'changeme',
     ldapfilter => '(objectClass=shadowAccount)',
   }
-  $db_backend = 'mnesia'
-  $db_params  = ''
-  $enable_stun = true
-  $language = 'en'
-  $package_ensure = 'installed'
-  $service_ensure = 'running'
-  $service_enable = true
-  $service_flags = ''
-  $pidfile = '/var/run/ejabberd/ejabberd.pid'
-  $mod_register_ips = ''
-  $mod_register_subject = ''
-  $mod_register_body = ''
+  $db_backend              = 'mnesia'
+  $db_params               = ''
+  $enable_stun             = true
+  $language                = 'en'
+  $package_ensure          = 'installed'
+  $service_ensure          = 'running'
+  $service_enable          = true
+  $service_flags           = ''
+  $pidfile                 = '/var/run/ejabberd/ejabberd.pid'
+  $mod_register_ips        = ''
+  $mod_register_subject    = ''
+  $mod_register_body       = ''
+  $enable_mod_proxy65      = false
+  $mod_proxy65_access      = 'local'
+  $mod_proxy65_connections = 5
 }

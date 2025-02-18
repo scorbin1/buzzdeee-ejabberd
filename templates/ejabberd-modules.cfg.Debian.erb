@@ -51,9 +51,15 @@ modules:
     interval: 60
   mod_privacy: {}
   mod_private: {}
+<% if @enable_mod_proxy65 %>
   mod_proxy65:
-    access: local
-    max_connections: 5
+    access: <%= @mod_proxy65_access %>
+    max_connections: <%= @mod_proxy65_connections %>
+<%- else -%>
+  ## mod_proxy65:	
+  ##   access: local	
+  ##   max_connections: 5
+<% end %>
   mod_pubsub:
     access_createnode: pubsub_createnode
     plugins:
