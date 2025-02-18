@@ -67,7 +67,7 @@ modules:
         access_model: whitelist
   mod_push: {}
   mod_push_keepalive: {}
-<% if @mod_register_ips or @mod_register_subject or @mod_register_body %>
+<% unless @mod_register_ips.empty? and @mod_register_subject.empty? and @mod_register_body.empty? %>
   mod_register:
     ## Only accept registration requests from the "trusted"
     ## network (see access_rules section above).
@@ -83,16 +83,16 @@ modules:
   ##   ## https://github.com/ge0rg/jabber-spam-fighting-manifesto
   ##   ip_access: trusted_network
 <% end %>
-<% if @mod_register_ips  %>
+<% unless @mod_register_ips.empty?  %>
     ip_access: <%= @mod_register_ips %>
 <% end %>
-<% if @mod_register_subject or @mod_register_body %>
+<% unless @mod_register_subject.empty? and @mod_register_body.empty? %>
     welcome_message:
 <% end %>
-<% if @mod_register_subject %>
+<% unless @mod_register_subject.empty? %>
       subject: "<%= @mod_register_subject %>"
 <% end %>
-<% if @mod_register_body %>
+<% unless @mod_register_body.empty? %>
       body: <%= @mod_register_body %>
 <% end %>
   mod_roster:

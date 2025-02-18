@@ -257,19 +257,22 @@ class ejabberd (
   }
 
   class { 'ejabberd::config':
-    ejabberd_group   => $ejabberd_group,
-    log_level        => $log_level,
-    log_rotate_count => $log_rotate_count,
-    domains          => $domains,
-    tls_options      => $tls_options,
-    servercertfile   => $servercertfile,
-    auth_method      => $auth_method,
-    auth_attrs       => $auth_attrs,
-    db_backend       => $db_backend,
-    db_params        => $db_params,
-    enable_stun      => $enable_stun,
-    language         => $language,
-    transports       => $transports,
+    ejabberd_group          => $ejabberd_group,
+    log_level               => $log_level,
+    log_rotate_count        => $log_rotate_count,
+    domains                 => $domains,
+    tls_options             => $tls_options,
+    servercertfile          => $servercertfile,
+    auth_method             => $auth_method,
+    auth_attrs              => $auth_attrs,
+    db_backend              => $db_backend,
+    db_params               => $db_params,
+    enable_stun             => $enable_stun,
+    language                => $language,
+    transports              => $transports,
+    mod_register_ips        => $mod_register_ips,
+    mod_register_subject    => $mod_register_subject,
+    mod_register_body       => $mod_register_body,
   }
 
   class { 'ejabberd::certificate':
