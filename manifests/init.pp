@@ -209,6 +209,26 @@
 #   Default Value: undef
 #   Description: Custom body for mod_register
 #
+# @param enable_mod_ping
+#   Type: Boolean
+#   Default Value: false
+#   Description: Whether to enable mod_ping
+#
+# @param mod_ping_ack_timeout
+#   Type: Integer
+#   Default Value: 0
+#   Description: timeout period in minutes
+#
+# @param mod_ping_interval
+#   Type: Integer
+#   Default Value: 0
+#   Description: How often to send pings to connected clients
+#
+# @param mod_ping_timeout_action
+#   Type: Enum['none','kill']
+#   Default Value: none
+#   Description: Action to take on timeout
+#
 # === Examples
 #
 #  class { 'ejabberd':
@@ -269,6 +289,10 @@ class ejabberd (
   Boolean                                                     $enable_mod_proxy65           = $ejabberd::params::enable_mod_proxy65,
   String                                                      $mod_proxy65_access           = $ejabberd::params::mod_proxy65_access,
   Integer                                                     $mod_proxy65_connections      = $ejabberd::params::mod_proxy65_connections,
+  Boolean                                                     $enable_mod_ping              = $ejabberd::params::enable_mod_ping,
+  Integer                                                     $mod_ping_ack_timeout         = $ejabberd::params::mod_ping_ack_timeout,
+  Integer                                                     $mod_ping_interval            = $ejabberd::params::mod_ping_interval,
+  Enum['none','kill']                                         $mod_ping_timeout_action      = $ejabberd::params::mod_ping_timeout_action,
 ) inherits ejabberd::params {
   class { 'ejabberd::install':
     package_ensure   => $package_ensure,
@@ -294,6 +318,10 @@ class ejabberd (
     enable_mod_proxy65      => $enable_mod_proxy65,
     mod_proxy65_access      => $mod_proxy65_access,
     mod_proxy65_connections => $mod_proxy65_connections,
+    enable_mod_ping         => $enable_mod_ping,
+    mod_ping_ack_timeout    => $mod_ping_ack_timeout,
+    mod_ping_interval       => $mod_ping_interval,
+    mod_ping_timeout_action => $mod_ping_timeout_action,
   }
 
   class { 'ejabberd::certificate':

@@ -59,4 +59,8 @@ class ejabberd::params {
   $enable_mod_proxy65      = false
   $mod_proxy65_access      = 'local'
   $mod_proxy65_connections = 5
+  $enable_mod_ping         = false
+  $mod_ping_ack_timeout    = 0
+  $mod_ping_interval       = 0
+  $mod_ping_timeout_action = none
 }

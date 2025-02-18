@@ -131,6 +131,26 @@
 #   Default Value: defined by calling class
 #   Description: Custom body for mod_register
 #
+# @param enable_mod_ping
+#   Type: Boolean
+#   Default Value: defined by calling class
+#   Description: Whether to enable mod_ping
+#
+# @param mod_ping_ack_timeout
+#   Type: Integer
+#   Default Value: defined by calling class
+#   Description: timeout period in minutes
+#
+# @param mod_ping_interval
+#   Type: Integer
+#   Default Value: defined by calling class
+#   Description: How often to send pings to connected clients
+#
+# @param mod_ping_timeout_action
+#   Type: Enum['none','kill']
+#   Default Value: defined by calling class
+#   Description: Action to take on timeout
+#
 class ejabberd::config (
   String                                                      $log_level,
   Integer                                                     $log_rotate_count,
@@ -151,6 +171,10 @@ class ejabberd::config (
   Boolean                                                     $enable_mod_proxy65,
   String                                                      $mod_proxy65_access,
   Integer                                                     $mod_proxy65_connections,
+  Boolean                                                     $enable_mod_ping,
+  Integer                                                     $mod_ping_ack_timeout,
+  Integer                                                     $mod_ping_interval,
+  Enum['none','kill']                                         $mod_ping_timeout_action,
 ) {
   case $facts['os']['family'] {
     'Debian': {
