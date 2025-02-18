@@ -240,7 +240,7 @@ class ejabberd (
   String                                                      $language                     = $ejabberd::params::language,
   Hash                                                        $transports                   = $ejabberd::params::transports,
   Boolean                                                     $enable_firewall_rules        = $ejabberd::params::enable_firewall_rules,
-  Array                                                       $ejabberd_allowed_clients             = $ejabberd::params::ejabberd_allowed_clients,
+  Array                                                       $ejabberd_allowed_clients     = $ejabberd::params::ejabberd_allowed_clients,
   Integer                                                     $ejabberd_firewall_rule_order = $ejabberd::params::ejabberd_firewall_rule_order,
   Integer                                                     $ejabberd_port                = $ejabberd::params::ejabberd_port,
   Integer                                                     $ejabberd_xmpp_port           = $ejabberd::params::ejabberd_xmpp_port,
