@@ -2,7 +2,7 @@
 # These parameters drive the module.
 
 class ejabberd::params {
-  $templatestorage = 'puppet'
+  $templatestorage = 'none'
 
   case $facts['os']['family'] {
     'Debian': {
