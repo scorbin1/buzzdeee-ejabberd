@@ -8,11 +8,13 @@ class ejabberd::params {
     'Debian': {
       $ejabberd_group   = 'ejabberd'
       $log_rotate_count = 0
+      $servercertfile = '/etc/ejabberd/ejabberd.pem'
     }
 
     default: {
       $ejabberd_group  = '_ejabberd'
       $log_rotate_count = 1
+      $servercertfile = '/etc/ejabberd/mycert.pem'
     }
   }
 
@@ -29,7 +31,6 @@ class ejabberd::params {
 
   $log_level = 'info'
   $domains = ['example.net', 'example.com', 'example.org']
-  $servercertfile = '/etc/ejabberd/mycert.pem'
   $auth_method = 'internal'
   $transports = {}
   $auth_attrs = {
