@@ -62,4 +62,5 @@ s2s_protocol_options: 'TLS_OPTIONS'
 # c2s_dhfile: 'DH_FILE'
 # s2s_dhfile: 'DH_FILE'
 
-language: <%= @language %>
+
+<% if @language != 'en' and @language != '' %>language: <%= @language %><% end %>
