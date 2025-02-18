@@ -69,10 +69,10 @@ modules:
     access: <%= @mod_proxy65_access %>
     max_connections: <%= @mod_proxy65_connections %>
 <%- else -%>
-  ## mod_proxy65:	
-  ##   access: local	
+  ## mod_proxy65:
+  ##   access: local
   ##   max_connections: 5
-<% end %>
+<%- end -%>
   mod_pubsub:
     access_createnode: pubsub_createnode
     plugins:
@@ -101,29 +101,29 @@ modules:
   ##   ## address. See the Jabber SPAM Manifesto for details:
   ##   ## https://github.com/ge0rg/jabber-spam-fighting-manifesto
   ##   ip_access: trusted_network
-<% end %>
-<% unless @mod_register_ips.empty?  %>
+<%- end -%>
+<%- unless @mod_register_ips.empty?  -%>
     ip_access: <%= @mod_register_ips %>
-<% end %>
-<% unless @mod_register_subject.empty? and @mod_register_body.empty? %>
+<%- end -%>
+<%- unless @mod_register_subject.empty? and @mod_register_body.empty? -%>
     welcome_message:
-<% end %>
-<% unless @mod_register_subject.empty? %>
+<%- end -%>
+<%- unless @mod_register_subject.empty? -%>
       subject: "<%= @mod_register_subject %>"
-<% end %>
-<% unless @mod_register_body.empty? %>
+<%- end -%>
+<%- unless @mod_register_body.empty? -%>
       body: <%= @mod_register_body %>
-<% end %>
+<%- end -%>
   mod_roster:
     versioning: true
-##  mod_s2s_dialback: {}
+  mod_s2s_dialback: {}
   mod_shared_roster: {}
   mod_sic: {}
   mod_stream_mgmt:
     resend_on_timeout: if_offline
   mod_stun_disco: {}
   mod_vcard:
-    search: true
+    search: false
   mod_vcard_xupdate: {}
   mod_version:
     show_os: false
