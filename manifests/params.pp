@@ -11,6 +11,7 @@ class ejabberd::params {
       $servercertfile = '/etc/ejabberd/ejabberd.pem'
     }
 
+    # Module originally written for FreeBSD
     default: {
       $ejabberd_group  = '_ejabberd'
       $log_rotate_count = 1

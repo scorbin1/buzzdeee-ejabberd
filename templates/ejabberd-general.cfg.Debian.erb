@@ -27,6 +27,7 @@ log_rotate_count: <%= @log_rotate_count %>
 #   - "example.net"
 #   - "example.com"
 #   - "example.org"
+
 <% if @domains.is_a? Array -%>
 hosts:
 <%- @domains.each do |domain| -%>
