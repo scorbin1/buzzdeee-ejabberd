@@ -68,106 +68,118 @@ class ejabberd::firewall (
           ## ToDo: Can this be implemented by turning array into comma seperated string instead of individual rules?
           # ejabberd server - TCP 5443
           firewall { "${ejabberd_firewall_rule_order} ejabberd server from ${client}":
-            chain => 'INPUT',
-            dport => $ejabberd_port,
-            proto => 'tcp',
-            jump  => accept,
+            chain   => 'INPUT',
+            dport   => $ejabberd_port,
+            proto   => 'tcp',
+            ctstate => 'NEW',
+            jump    => accept,
           }
 
           # ejabberd - xmpp - TCP 5222
           firewall { "${ejabberd_firewall_rule_order} ejabberd xmpp from ${client}":
-            chain => 'INPUT',
-            dport => $ejabberd_xmpp_port,
-            proto => 'tcp',
-            jump  => accept,
+            chain   => 'INPUT',
+            dport   => $ejabberd_xmpp_port,
+            proto   => 'tcp',
+            ctstate => 'NEW',
+            jump    => accept,
           }
 
           # ejabberd - xmpps - TCP 5223
           firewall { "${ejabberd_firewall_rule_order} ejabberd xmpps from ${client}":
-            chain => 'INPUT',
-            dport => $ejabberd_xmpps_port,
-            proto => 'tcp',
-            jump  => accept,
+            chain   => 'INPUT',
+            dport   => $ejabberd_xmpps_port,
+            proto   => 'tcp',
+            ctstate => 'NEW',
+            jump    => accept,
           }
 
           # ejabberd - xmpp_s2s - TCP 5269
           firewall { "${ejabberd_firewall_rule_order} ejabberd xmpp_s2s from ${client}":
-            chain => 'INPUT',
-            dport => $ejabberd_xmpp_s2s_port,
-            proto => 'tcp',
-            jump  => accept,
+            chain   => 'INPUT',
+            dport   => $ejabberd_xmpp_s2s_port,
+            proto   => 'tcp',
+            ctstate => 'NEW',
+            jump    => accept,
           }
 
           # ejabberd - xmpp_admin_ui - TCP 5280
           firewall { "${ejabberd_firewall_rule_order} ejabberd admin ui from ${client}":
-            chain => 'INPUT',
-            dport => $ejabberd_xmpp_admin_ui_port,
-            proto => 'tcp',
-            jump  => accept,
+            chain   => 'INPUT',
+            dport   => $ejabberd_xmpp_admin_ui_port,
+            proto   => 'tcp',
+            ctstate => 'NEW',
+            jump    => accept,
           }
 
           # ejabberd - mqtt - TCP 1883
           firewall { "${ejabberd_firewall_rule_order} ejabberd mqtt from ${client}":
-            chain => 'INPUT',
-            dport => $ejabberd_mqtt_port,
-            proto => 'tcp',
-            jump  => accept,
+            chain   => 'INPUT',
+            dport   => $ejabberd_mqtt_port,
+            proto   => 'tcp',
+            ctstate => 'NEW',
+            jump    => accept,
           }
         }
         else {
           ## ToDo: Can this be implemented by turning array into comma seperated string instead of individual rules?
           # ejabberd server - TCP 5443
           firewall { "${ejabberd_firewall_rule_order} ejabberd server from ${client}":
-            chain  => 'INPUT',
-            dport  => $ejabberd_port,
-            proto  => 'tcp',
-            source => $client,
-            jump   => accept,
+            chain   => 'INPUT',
+            dport   => $ejabberd_port,
+            proto   => 'tcp',
+            source  => $client,
+            ctstate => 'NEW',
+            jump    => accept,
           }
 
           # ejabberd - xmpp - TCP 5222
           firewall { "${ejabberd_firewall_rule_order} ejabberd xmpp from ${client}":
-            chain  => 'INPUT',
-            dport  => $ejabberd_xmpp_port,
-            proto  => 'tcp',
-            source => $client,
-            jump   => accept,
+            chain   => 'INPUT',
+            dport   => $ejabberd_xmpp_port,
+            proto   => 'tcp',
+            source  => $client,
+            ctstate => 'NEW',
+            jump    => accept,
           }
 
           # ejabberd - xmpps - TCP 5223
           firewall { "${ejabberd_firewall_rule_order} ejabberd xmpps from ${client}":
-            chain  => 'INPUT',
-            dport  => $ejabberd_xmpps_port,
-            proto  => 'tcp',
-            source => $client,
-            jump   => accept,
+            chain   => 'INPUT',
+            dport   => $ejabberd_xmpps_port,
+            proto   => 'tcp',
+            source  => $client,
+            ctstate => 'NEW',
+            jump    => accept,
           }
 
           # ejabberd - xmpp_s2s - TCP 5269
           firewall { "${ejabberd_firewall_rule_order} ejabberd xmpp_s2s from ${client}":
-            chain  => 'INPUT',
-            dport  => $ejabberd_xmpp_s2s_port,
-            proto  => 'tcp',
-            source => $client,
-            jump   => accept,
+            chain   => 'INPUT',
+            dport   => $ejabberd_xmpp_s2s_port,
+            proto   => 'tcp',
+            source  => $client,
+            ctstate => 'NEW',
+            jump    => accept,
           }
 
           # ejabberd - xmpp_admin_ui - TCP 5280
           firewall { "${ejabberd_firewall_rule_order} ejabberd admin ui from ${client}":
-            chain  => 'INPUT',
-            dport  => $ejabberd_xmpp_admin_ui_port,
-            proto  => 'tcp',
-            source => $client,
-            jump   => accept,
+            chain   => 'INPUT',
+            dport   => $ejabberd_xmpp_admin_ui_port,
+            proto   => 'tcp',
+            source  => $client,
+            ctstate => 'NEW',
+            jump    => accept,
           }
 
           # ejabberd - mqtt - TCP 1883
           firewall { "${ejabberd_firewall_rule_order} ejabberd mqtt from ${client}":
-            chain  => 'INPUT',
-            dport  => $ejabberd_mqtt_port,
-            proto  => 'tcp',
-            source => $client,
-            jump   => accept,
+            chain   => 'INPUT',
+            dport   => $ejabberd_mqtt_port,
+            proto   => 'tcp',
+            source  => $client,
+            ctstate => 'NEW',
+            jump    => accept,
           }
         }
       }
