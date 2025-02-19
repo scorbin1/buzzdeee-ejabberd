@@ -115,7 +115,9 @@ modules:
   mod_vcard:
     search: false
   mod_vcard_xupdate: {}
-  mod_version:
+<%- if @enable_mod_version -%>  mod_version: {}
+<%- else -%>  mod_version:
     show_os: false
+<%- end -%>
   mod_webpresence: {}
   mod_pottymouth: {}

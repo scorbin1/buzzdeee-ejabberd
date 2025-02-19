@@ -175,6 +175,7 @@ class ejabberd::config (
   Integer                                                     $mod_ping_ack_timeout,
   Integer                                                     $mod_ping_interval,
   Enum['none','kill']                                         $mod_ping_timeout_action,
+  Boolean                                                     $enable_mod_version,
 ) {
   case $facts['os']['family'] {
     'Debian': {

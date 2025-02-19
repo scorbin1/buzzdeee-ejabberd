@@ -229,6 +229,11 @@
 #   Default Value: none
 #   Description: Action to take on timeout
 #
+# @param enable_mod_version
+#   Type: Boolean
+#   Default Value: true
+#   Description: Whether to enable mod_version
+#
 # === Examples
 #
 #  class { 'ejabberd':
@@ -293,6 +298,7 @@ class ejabberd (
   Integer                                                     $mod_ping_ack_timeout         = $ejabberd::params::mod_ping_ack_timeout,
   Integer                                                     $mod_ping_interval            = $ejabberd::params::mod_ping_interval,
   Enum['none','kill']                                         $mod_ping_timeout_action      = $ejabberd::params::mod_ping_timeout_action,
+  Boolean                                                     $enable_mod_version           = $ejabberd::params::enable_mod_version,
 ) inherits ejabberd::params {
   class { 'ejabberd::install':
     package_ensure   => $package_ensure,
@@ -322,6 +328,7 @@ class ejabberd (
     mod_ping_ack_timeout    => $mod_ping_ack_timeout,
     mod_ping_interval       => $mod_ping_interval,
     mod_ping_timeout_action => $mod_ping_timeout_action,
+    enable_mod_version      => $enable_mod_version,
   }
 
   class { 'ejabberd::certificate':

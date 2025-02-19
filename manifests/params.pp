@@ -63,4 +63,5 @@ class ejabberd::params {
   $mod_ping_ack_timeout    = 0
   $mod_ping_interval       = 0
   $mod_ping_timeout_action = none
+  $enable_mod_version      = true
 }
