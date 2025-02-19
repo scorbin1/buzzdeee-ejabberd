@@ -4,7 +4,8 @@ modules:
   mod_admin_extra: {}
   mod_announce:
     access: announce
-  mod_avatar: {}
+  <%- if @enable_mod_vcard and @enable_mod_avatar -%>  mod_avatar: {}
+  <%- end -%>
   mod_blocking: {}
   mod_bosh: {}
   mod_caps: {}

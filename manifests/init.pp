@@ -249,6 +249,11 @@
 #   Default Value: true
 #   Description: Whether to enable xupdate for mod_vcard
 #
+# @param enable_mod_avatar
+#   Type: Boolean
+#   Default Value: true
+#   Description: Whether to enable mod_avatar(reqires mod_vcard)
+#
 # === Examples
 #
 #  class { 'ejabberd':
@@ -317,6 +322,7 @@ class ejabberd (
   Boolean                                                     $enable_mod_vcard             = $ejabberd::params::enable_mod_vcard,
   Boolean                                                     $mod_vcard_search_enable      = $ejabberd::params::mod_vcard_search_enable,
   Boolean                                                     $mod_vcard_xupdate_enable     = $ejabberd::params::mod_vcard_xupdate_enable,
+  Boolean                                                     $enable_mod_avatar            = $ejabberd::params::enable_mod_avatar,
 ) inherits ejabberd::params {
   class { 'ejabberd::install':
     package_ensure   => $package_ensure,
@@ -350,6 +356,7 @@ class ejabberd (
     enable_mod_vcard         => $enable_mod_vcard,
     mod_vcard_search_enable  => $mod_vcard_search_enable,
     mod_vcard_xupdate_enable => $mod_vcard_xupdate_enable,
+    enable_mod_avatar        => $enable_mod_avatar,
   }
 
   class { 'ejabberd::certificate':
