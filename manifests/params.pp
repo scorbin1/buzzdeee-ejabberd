@@ -31,7 +31,7 @@ class ejabberd::params {
   $ejabberd_mqtt_port           = 1883
 
   $log_level   = 'info'
-  $domains     = ['example.net', 'example.com', 'example.org']
+  $domains     = ['localhost']
   $auth_method = 'internal'
   $transports  = {}
   $auth_attrs  = {
@@ -64,7 +64,7 @@ class ejabberd::params {
   $mod_ping_interval        = 0
   $mod_ping_timeout_action  = none
   $enable_mod_version       = true
-  $enable_mod_vcard         = false
+  $enable_mod_vcard         = true
   $mod_vcard_search_enable  = false
-  $mod_vcard_xupdate_enable = false
+  $mod_vcard_xupdate_enable = true
 }
