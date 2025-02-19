@@ -234,6 +234,21 @@
 #   Default Value: true
 #   Description: Whether to enable mod_version
 #
+# @param enable_mod_vcard
+#   Type: Boolean
+#   Default Value: true
+#   Description: Whether to enable mod_vcard
+#
+# @param mod_vcard_search_enable
+#   Type: Boolean
+#   Default Value: true
+#   Description: Whether to enable search for mod_vcard
+#
+# @param mod_vcard_xupdate_enable
+#   Type: Boolean
+#   Default Value: true
+#   Description: Whether to enable xupdate for mod_vcard
+#
 # === Examples
 #
 #  class { 'ejabberd':
@@ -299,6 +314,9 @@ class ejabberd (
   Integer                                                     $mod_ping_interval            = $ejabberd::params::mod_ping_interval,
   Enum['none','kill']                                         $mod_ping_timeout_action      = $ejabberd::params::mod_ping_timeout_action,
   Boolean                                                     $enable_mod_version           = $ejabberd::params::enable_mod_version,
+  Boolean                                                     $enable_mod_vcard             = $ejabberd::params::enable_mod_vcard,
+  Boolean                                                     $mod_vcard_search_enable      = $ejabberd::params::mod_vcard_search_enable,
+  Boolean                                                     $mod_vcard_xupdate_enable     = $ejabberd::params::mod_vcard_xupdate_enable,
 ) inherits ejabberd::params {
   class { 'ejabberd::install':
     package_ensure   => $package_ensure,

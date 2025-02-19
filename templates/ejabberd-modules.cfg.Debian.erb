@@ -112,9 +112,12 @@ modules:
   mod_stream_mgmt:
     resend_on_timeout: if_offline
   mod_stun_disco: {}
-  mod_vcard:
-    search: false
-  mod_vcard_xupdate: {}
+<%- if @enable_mod_vcard -%>  mod_vcard:
+<%- if @mod_vcard_search_enable -%>    search: true
+<%- end -%>
+<%- if @mod_vcard_xupdate_enable -%>  mod_vcard_xupdate: {}
+<%- end -%>
+<%- end -%>
 <%- if @enable_mod_version -%>  mod_version: {}
 <%- else -%>  mod_version:
     show_os: false

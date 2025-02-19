@@ -176,6 +176,9 @@ class ejabberd::config (
   Integer                                                     $mod_ping_interval,
   Enum['none','kill']                                         $mod_ping_timeout_action,
   Boolean                                                     $enable_mod_version,
+  Boolean                                                     $enable_mod_vcard,
+  Boolean                                                     $mod_vcard_search_enable,
+  Boolean                                                     $mod_vcard_xupdate_enable,
 ) {
   case $facts['os']['family'] {
     'Debian': {
