@@ -30,11 +30,11 @@ class ejabberd::params {
   $ejabberd_xmpp_admin_ui_port  = 5280
   $ejabberd_mqtt_port           = 1883
 
-  $log_level = 'info'
-  $domains = ['example.net', 'example.com', 'example.org']
+  $log_level   = 'info'
+  $domains     = ['example.net', 'example.com', 'example.org']
   $auth_method = 'internal'
-  $transports = {}
-  $auth_attrs = {
+  $transports  = {}
+  $auth_attrs  = {
     servers    => 'localhost',
     uidattr    => 'uid',
     port       => '389',
@@ -44,27 +44,27 @@ class ejabberd::params {
     password   => 'changeme',
     ldapfilter => '(objectClass=shadowAccount)',
   }
-  $db_backend              = 'mnesia'
-  $db_params               = ''
-  $enable_stun             = true
-  $language                = 'en'
-  $package_ensure          = 'installed'
-  $service_ensure          = 'running'
-  $service_enable          = true
-  $service_flags           = ''
-  $pidfile                 = '/var/run/ejabberd/ejabberd.pid'
-  $mod_register_ips        = ''
-  $mod_register_subject    = ''
-  $mod_register_body       = ''
-  $enable_mod_proxy65      = false
-  $mod_proxy65_access      = 'local'
-  $mod_proxy65_connections = 5
-  $enable_mod_ping         = false
-  $mod_ping_ack_timeout    = 0
-  $mod_ping_interval       = 0
-  $mod_ping_timeout_action = none
-  $enable_mod_version      = true
-  $enable_mod_vcard        = false
-  $mod_vcard_search_enable = false
+  $db_backend               = 'mnesia'
+  $db_params                = ''
+  $enable_stun              = true
+  $language                 = 'en'
+  $package_ensure           = 'installed'
+  $service_ensure           = 'running'
+  $service_enable           = true
+  $service_flags            = ''
+  $pidfile                  = '/var/run/ejabberd/ejabberd.pid'
+  $mod_register_ips         = ''
+  $mod_register_subject     = ''
+  $mod_register_body        = ''
+  $enable_mod_proxy65       = false
+  $mod_proxy65_access       = 'local'
+  $mod_proxy65_connections  = 5
+  $enable_mod_ping          = false
+  $mod_ping_ack_timeout     = 0
+  $mod_ping_interval        = 0
+  $mod_ping_timeout_action  = none
+  $enable_mod_version       = true
+  $enable_mod_vcard         = false
+  $mod_vcard_search_enable  = false
   $mod_vcard_xupdate_enable = false
 }
