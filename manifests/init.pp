@@ -347,9 +347,9 @@ class ejabberd (
     mod_ping_interval        => $mod_ping_interval,
     mod_ping_timeout_action  => $mod_ping_timeout_action,
     enable_mod_version       => $enable_mod_version,
-    enable_mod_vcard         => false,
-    mod_vcard_search_enable  => false,
-    mod_vcard_xupdate_enable => false,
+    enable_mod_vcard         => $enable_mod_vcard,
+    mod_vcard_search_enable  => $mod_vcard_search_enable,
+    mod_vcard_xupdate_enable => $mod_vcard_xupdate_enable,
   }
 
   class { 'ejabberd::certificate':
