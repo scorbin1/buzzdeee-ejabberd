@@ -113,7 +113,7 @@ modules:
     resend_on_timeout: if_offline
   mod_stun_disco: {}
 <%- if @enable_mod_vcard -%>  mod_vcard:
-<%- if @mod_vcard_search_enable -%>    search: true
+    search: <%= @mod_vcard_search_enable %>
 <%- end -%>
 <%- if @mod_vcard_xupdate_enable -%>  mod_vcard_xupdate: {}
 <%- end -%>
