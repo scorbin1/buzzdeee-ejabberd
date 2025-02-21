@@ -26,15 +26,19 @@ class ejabberd::install (
     ensure => $package_ensure,
   }
 
-  package { 'ejabberd-mod-pottymouth':
-    ensure => $package_ensure,
+  if $ejabberd::enable_mod_pottymouth {
+    package { 'ejabberd-mod-pottymouth':
+      ensure => $package_ensure,
+    }
   }
 
   package { 'ejabberd-mod-s2s-log':
     ensure => $package_ensure,
   }
 
-  package { 'ejabberd-mod-webpresence':
-    ensure => $package_ensure,
+  if $ejabberd::enable_mod_webpresence {
+    package { 'ejabberd-mod-webpresence':
+      ensure => $package_ensure,
+    }
   }
 }

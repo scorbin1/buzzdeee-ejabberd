@@ -36,6 +36,8 @@ class ejabberd::config (
   Boolean                                                     $mod_vcard_xupdate_enable,
   Boolean                                                     $enable_mod_avatar,
   Variant[Array[String], String]                              $admin_users,
+  Boolean                                                     $enable_mod_webpresence,
+  Boolean                                                     $enable_mod_pottymouth,
 ) {
   $config_filename = '/etc/ejabberd/ejabberd.yml'
 

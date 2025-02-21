@@ -71,4 +71,6 @@ class ejabberd::params {
   $mod_vcard_xupdate_enable         = true
   $enable_mod_avatar                = true
   $admin_users                      = ''
+  $enable_mod_webpresence           = false
+  $enable_mod_pottymouth            = false
 }

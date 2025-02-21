@@ -269,6 +269,16 @@
 #   Default Value: ""
 #   Description: users allowed to admin the server
 #
+# @param enable_mod_webpresence
+#   Type: Boolean
+#   Default Value: false
+#   Description: Whether to enable mod_webpresence
+#
+# @param enable_mod_pottymouth
+#   Type: Boolean
+#   Default Value: false
+#   Description: Whether to enable mod_pottymouth
+#
 # === Examples
 #
 #  class { 'ejabberd':
@@ -341,6 +351,8 @@ class ejabberd (
   Boolean                                                     $mod_vcard_xupdate_enable         = $ejabberd::params::mod_vcard_xupdate_enable,
   Boolean                                                     $enable_mod_avatar                = $ejabberd::params::enable_mod_avatar,
   Variant[Array[String], String]                              $admin_users                      = $ejabberd::params::admin_users,
+  Boolean                                                     $enable_mod_webpresence           = $ejabberd::params::enable_mod_webpresence,
+  Boolean                                                     $enable_mod_pottymouth            = $ejabberd::params::enable_mod_pottymouth,
 ) inherits ejabberd::params {
   class { 'ejabberd::install':
     package_ensure   => $package_ensure,
@@ -378,6 +390,8 @@ class ejabberd (
     mod_vcard_xupdate_enable         => $mod_vcard_xupdate_enable,
     enable_mod_avatar                => $enable_mod_avatar,
     admin_users                      => $admin_users,
+    enable_mod_webpresence           => $enable_mod_webpresence,
+    enable_mod_pottymouth            => $enable_mod_pottymouth,
   }
 
   class { 'ejabberd::certificate':

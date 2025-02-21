@@ -122,5 +122,7 @@ modules:
 <%- else -%>  mod_version:
     show_os: false
 <%- end -%>
-  mod_webpresence: {}
-  mod_pottymouth: {}
+<%- if @enable_mod_webpresence -%>  mod_webpresence: {}
+<%- end -%>
+<%- if @enable_mod_pottymouth -%>  mod_pottymouth: {}
+<%- end -%>
