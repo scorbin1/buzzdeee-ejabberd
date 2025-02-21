@@ -212,12 +212,12 @@
 # @param mod_proxy65_access
 #   Type: String
 #   Default Value: undef
-#   Description: Custom body for mod_register
+#   Description: TODO
 #
 # @param mod_proxy65_connections
 #   Type: String
 #   Default Value: undef
-#   Description: Custom body for mod_register
+#   Description: TODO
 #
 # @param enable_mod_ping
 #   Type: Boolean
