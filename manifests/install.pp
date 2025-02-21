@@ -22,8 +22,10 @@ class ejabberd::install (
     ensure => $package_ensure,
   }
 
-  package { 'ejabberd-mod-muc-log-http':
-    ensure => $package_ensure,
+  if $ejabberd::enable_mod_muc_log_http {
+    package { 'ejabberd-mod-muc-log-http':
+      ensure => $package_ensure,
+    }
   }
 
   if $ejabberd::enable_mod_pottymouth {
@@ -32,8 +34,10 @@ class ejabberd::install (
     }
   }
 
-  package { 'ejabberd-mod-s2s-log':
-    ensure => $package_ensure,
+  if $ejabberd::enable_mod_s2s_log {
+    package { 'ejabberd-mod-s2s-log':
+      ensure => $package_ensure,
+    }
   }
 
   if $ejabberd::enable_mod_webpresence {

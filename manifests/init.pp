@@ -279,6 +279,16 @@
 #   Default Value: false
 #   Description: Whether to enable mod_pottymouth
 #
+# @param enable_mod_s2s_log
+#   Type: Boolean
+#   Default Value: false
+#   Description: Whether to enable enable_mod_s2s_log
+#
+# @param enable_mod_muc_log_http
+#   Type: Boolean
+#   Default Value: false
+#   Description: Whether to enable mod_muc_log_http
+#
 # === Examples
 #
 #  class { 'ejabberd':
@@ -353,6 +363,8 @@ class ejabberd (
   Variant[Array[String], String]                              $admin_users                      = $ejabberd::params::admin_users,
   Boolean                                                     $enable_mod_webpresence           = $ejabberd::params::enable_mod_webpresence,
   Boolean                                                     $enable_mod_pottymouth            = $ejabberd::params::enable_mod_pottymouth,
+  Boolean                                                     $enable_mod_s2s_log               = $ejabberd::params::enable_mod_s2s_log,
+  Boolean                                                     $enable_mod_muc_log_http          = $ejabberd::params::enable_mod_muc_log_http,
 ) inherits ejabberd::params {
   class { 'ejabberd::install':
     package_ensure   => $package_ensure,
@@ -392,6 +404,8 @@ class ejabberd (
     admin_users                      => $admin_users,
     enable_mod_webpresence           => $enable_mod_webpresence,
     enable_mod_pottymouth            => $enable_mod_pottymouth,
+    enable_mod_s2s_log               => $enable_mod_s2s_log,
+    enable_mod_muc_log_http          => $enable_mod_muc_log_http,
   }
 
   class { 'ejabberd::certificate':

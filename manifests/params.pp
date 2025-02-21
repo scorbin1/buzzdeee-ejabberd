@@ -73,4 +73,6 @@ class ejabberd::params {
   $admin_users                      = ''
   $enable_mod_webpresence           = false
   $enable_mod_pottymouth            = false
+  $enable_mod_s2s_log               = false
+  $enable_mod_muc_log_http          = false
 }

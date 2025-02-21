@@ -38,6 +38,8 @@ class ejabberd::config (
   Variant[Array[String], String]                              $admin_users,
   Boolean                                                     $enable_mod_webpresence,
   Boolean                                                     $enable_mod_pottymouth,
+  Boolean                                                     $enable_mod_s2s_log,
+  Boolean                                                     $enable_mod_muc_log_http,
 ) {
   $config_filename = '/etc/ejabberd/ejabberd.yml'
 
