@@ -81,13 +81,21 @@ modules:
         access_model: whitelist
   mod_push: {}
   mod_push_keepalive: {}
-<% unless @mod_register_ips.empty? and @mod_register_subject.empty? and @mod_register_body.empty? %>
+<% if @enable_mod_register %>
   mod_register:
     ## Only accept registration requests from the "trusted"
     ## network (see access_rules section above).
     ## Think twice before enabling registration from any
     ## address. See the Jabber SPAM Manifesto for details:
     ## https://github.com/ge0rg/jabber-spam-fighting-manifesto
+<%- unless @mod_register_ips_allowed.empty? -%>    ip_access: <%= @mod_register_ips_allowed %>
+<%- end -%>
+<%- unless @mod_register_welcome_msg_subject.empty? and @mod_register_welcome_msg_body.empty? -%>    welcome_msg:
+<%- end -%>
+<%- unless @mod_register_welcome_msg_subject.empty? -%>      subject: "<%= @mod_register_welcome_msg_subject %>"
+<%- end -%>
+<%- unless @mod_register_welcome_msg_body.empty? -%>      body: <%= @mod_register_welcome_msg_body %>
+<%- end -%>
 <%- else -%>
   ## mod_register:
   ##   ## Only accept registration requests from the "trusted"
@@ -96,14 +104,6 @@ modules:
   ##   ## address. See the Jabber SPAM Manifesto for details:
   ##   ## https://github.com/ge0rg/jabber-spam-fighting-manifesto
   ##   ip_access: trusted_network
-<%- end -%>
-<%- unless @mod_register_ips.empty? -%>    ip_access: <%= @mod_register_ips %>
-<%- end -%>
-<%- unless @mod_register_subject.empty? and @mod_register_body.empty? -%>    welcome_message:
-<%- end -%>
-<%- unless @mod_register_subject.empty? -%>      subject: "<%= @mod_register_subject %>"
-<%- end -%>
-<%- unless @mod_register_body.empty? -%>      body: <%= @mod_register_body %>
 <%- end -%>
   mod_roster:
     versioning: true

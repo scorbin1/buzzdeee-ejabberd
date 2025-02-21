@@ -43,7 +43,7 @@ listen:
     request_handlers:
       /admin: ejabberd_web_admin
       /.well-known/acme-challenge: ejabberd_acme
-      /register: mod_register_web
+<%- if @enable_mod_register and @enable_mod_register_web -%>      /register: mod_register_web<%- end -%>
 <%- if @enable_stun -%>
   -
     port: 3478

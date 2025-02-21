@@ -179,17 +179,27 @@
 #   Default value: '1883'
 #   ejabberd mqtt service port.
 #
-# @param mod_register_ips
+# @param enable_mod_register
+#   Type: Boolean
+#   Default Value: false
+#   Description: Whether to enable mod_register module
+#
+# @param enable_mod_register_web
+#   Type: Boolean
+#   Default Value: false
+#   Description: Whether to enable mod_register_web module
+#
+# @param mod_register_ips_allowed
 #   Type: String
 #   Default Value: undef
 #   Description: IP addresses allowed to register using mod_register
 #
-# @param mod_register_subject
+# @param mod_register_welcome_msg_subject
 #   Type: String
 #   Default Value: undef
 #   Description: Custom subject line for mod_register
 #
-# @param mod_register_body
+# @param mod_register_welcome_msg_body
 #   Type: String
 #   Default Value: undef
 #   Description: Custom body for mod_register
@@ -286,84 +296,88 @@ type Ejabberd::AuthStruct = Struct[{
 }]
 
 class ejabberd (
-  Enum['puppet','hiera','none']                               $templatestorage              = $ejabberd::params::templatestorage,
-  String                                                      $ejabberd_group               = $ejabberd::params::ejabberd_group,
-  String                                                      $log_level                    = $ejabberd::params::log_level,
-  Optional[Integer]                                           $log_rotate_count             = $ejabberd::params::log_rotate_count,
-  Variant[Array[String], String]                              $domains                      = $ejabberd::params::domains,
-  Variant[Array[String], String]                              $tls_options                  = $ejabberd::params::tls_options,
-  String                                                      $servercertfile               = $ejabberd::params::servercertfile,
-  Enum['anonymous','external','internal','ldap','odbc','pam'] $auth_method                  = $ejabberd::params::auth_method,
-  Ejabberd::AuthStruct                                        $auth_attrs                   = $ejabberd::params::auth_attrs,
-  Enum['mssql', 'mysql', 'postgresql', 'mnesia']              $db_backend                   = $ejabberd::params::db_backend,
-  String                                                      $db_params                    = $ejabberd::params::db_params,
-  String                                                      $package_ensure               = $ejabberd::params::package_ensure,
-  String                                                      $service_ensure               = $ejabberd::params::service_ensure,
-  Boolean                                                     $service_enable               = $ejabberd::params::service_enable,
-  String                                                      $service_flags                = $ejabberd::params::service_flags,
-  Boolean                                                     $enable_stun                  = $ejabberd::params::enable_stun,
-  String                                                      $language                     = $ejabberd::params::language,
-  Hash                                                        $transports                   = $ejabberd::params::transports,
-  Boolean                                                     $enable_firewall_rules        = $ejabberd::params::enable_firewall_rules,
-  Array                                                       $ejabberd_allowed_clients     = $ejabberd::params::ejabberd_allowed_clients,
-  Integer                                                     $ejabberd_firewall_rule_order = $ejabberd::params::ejabberd_firewall_rule_order,
-  Integer                                                     $ejabberd_port                = $ejabberd::params::ejabberd_port,
-  Integer                                                     $ejabberd_xmpp_port           = $ejabberd::params::ejabberd_xmpp_port,
-  Integer                                                     $ejabberd_xmpps_port          = $ejabberd::params::ejabberd_xmpps_port,
-  Integer                                                     $ejabberd_xmpp_s2s_port       = $ejabberd::params::ejabberd_xmpp_s2s_port,
-  Integer                                                     $ejabberd_xmpp_admin_ui_port  = $ejabberd::params::ejabberd_xmpp_admin_ui_port,
-  Integer                                                     $ejabberd_mqtt_port           = $ejabberd::params::ejabberd_mqtt_port,
-  String                                                      $mod_register_ips             = $ejabberd::params::mod_register_ips,
-  String                                                      $mod_register_subject         = $ejabberd::params::mod_register_subject,
-  String                                                      $mod_register_body            = $ejabberd::params::mod_register_body,
-  Boolean                                                     $enable_mod_proxy65           = $ejabberd::params::enable_mod_proxy65,
-  String                                                      $mod_proxy65_access           = $ejabberd::params::mod_proxy65_access,
-  Integer                                                     $mod_proxy65_connections      = $ejabberd::params::mod_proxy65_connections,
-  Boolean                                                     $enable_mod_ping              = $ejabberd::params::enable_mod_ping,
-  Integer                                                     $mod_ping_ack_timeout         = $ejabberd::params::mod_ping_ack_timeout,
-  Integer                                                     $mod_ping_interval            = $ejabberd::params::mod_ping_interval,
-  Enum['none','kill']                                         $mod_ping_timeout_action      = $ejabberd::params::mod_ping_timeout_action,
-  Boolean                                                     $enable_mod_version           = $ejabberd::params::enable_mod_version,
-  Boolean                                                     $enable_mod_vcard             = $ejabberd::params::enable_mod_vcard,
-  Boolean                                                     $mod_vcard_search_enable      = $ejabberd::params::mod_vcard_search_enable,
-  Boolean                                                     $mod_vcard_xupdate_enable     = $ejabberd::params::mod_vcard_xupdate_enable,
-  Boolean                                                     $enable_mod_avatar            = $ejabberd::params::enable_mod_avatar,
-  Variant[Array[String], String]                              $admin_users                  = $ejabberd::params::admin_users,
+  Enum['puppet','hiera','none']                               $templatestorage                  = $ejabberd::params::templatestorage,
+  String                                                      $ejabberd_group                   = $ejabberd::params::ejabberd_group,
+  String                                                      $log_level                        = $ejabberd::params::log_level,
+  Optional[Integer]                                           $log_rotate_count                 = $ejabberd::params::log_rotate_count,
+  Variant[Array[String], String]                              $domains                          = $ejabberd::params::domains,
+  Variant[Array[String], String]                              $tls_options                      = $ejabberd::params::tls_options,
+  String                                                      $servercertfile                   = $ejabberd::params::servercertfile,
+  Enum['anonymous','external','internal','ldap','odbc','pam'] $auth_method                      = $ejabberd::params::auth_method,
+  Ejabberd::AuthStruct                                        $auth_attrs                       = $ejabberd::params::auth_attrs,
+  Enum['mssql', 'mysql', 'postgresql', 'mnesia']              $db_backend                       = $ejabberd::params::db_backend,
+  String                                                      $db_params                        = $ejabberd::params::db_params,
+  String                                                      $package_ensure                   = $ejabberd::params::package_ensure,
+  String                                                      $service_ensure                   = $ejabberd::params::service_ensure,
+  Boolean                                                     $service_enable                   = $ejabberd::params::service_enable,
+  String                                                      $service_flags                    = $ejabberd::params::service_flags,
+  Boolean                                                     $enable_stun                      = $ejabberd::params::enable_stun,
+  String                                                      $language                         = $ejabberd::params::language,
+  Hash                                                        $transports                       = $ejabberd::params::transports,
+  Boolean                                                     $enable_firewall_rules            = $ejabberd::params::enable_firewall_rules,
+  Array                                                       $ejabberd_allowed_clients         = $ejabberd::params::ejabberd_allowed_clients,
+  Integer                                                     $ejabberd_firewall_rule_order     = $ejabberd::params::ejabberd_firewall_rule_order,
+  Integer                                                     $ejabberd_port                    = $ejabberd::params::ejabberd_port,
+  Integer                                                     $ejabberd_xmpp_port               = $ejabberd::params::ejabberd_xmpp_port,
+  Integer                                                     $ejabberd_xmpps_port              = $ejabberd::params::ejabberd_xmpps_port,
+  Integer                                                     $ejabberd_xmpp_s2s_port           = $ejabberd::params::ejabberd_xmpp_s2s_port,
+  Integer                                                     $ejabberd_xmpp_admin_ui_port      = $ejabberd::params::ejabberd_xmpp_admin_ui_port,
+  Integer                                                     $ejabberd_mqtt_port               = $ejabberd::params::ejabberd_mqtt_port,
+  Boolean                                                     $enable_mod_register              = $ejabberd::params::enable_mod_register,
+  Boolean                                                     $enable_mod_register_web          = $ejabberd::params::enable_mod_register_web,
+  String                                                      $mod_register_ips_allowed         = $ejabberd::params::mod_register_ips_allowed,
+  String                                                      $mod_register_welcome_msg_subject = $ejabberd::params::mod_register_welcome_msg_subject,
+  String                                                      $mod_register_welcome_msg_body    = $ejabberd::params::mod_register_welcome_msg_body,
+  Boolean                                                     $enable_mod_proxy65               = $ejabberd::params::enable_mod_proxy65,
+  String                                                      $mod_proxy65_access               = $ejabberd::params::mod_proxy65_access,
+  Integer                                                     $mod_proxy65_connections          = $ejabberd::params::mod_proxy65_connections,
+  Boolean                                                     $enable_mod_ping                  = $ejabberd::params::enable_mod_ping,
+  Integer                                                     $mod_ping_ack_timeout             = $ejabberd::params::mod_ping_ack_timeout,
+  Integer                                                     $mod_ping_interval                = $ejabberd::params::mod_ping_interval,
+  Enum['none','kill']                                         $mod_ping_timeout_action          = $ejabberd::params::mod_ping_timeout_action,
+  Boolean                                                     $enable_mod_version               = $ejabberd::params::enable_mod_version,
+  Boolean                                                     $enable_mod_vcard                 = $ejabberd::params::enable_mod_vcard,
+  Boolean                                                     $mod_vcard_search_enable          = $ejabberd::params::mod_vcard_search_enable,
+  Boolean                                                     $mod_vcard_xupdate_enable         = $ejabberd::params::mod_vcard_xupdate_enable,
+  Boolean                                                     $enable_mod_avatar                = $ejabberd::params::enable_mod_avatar,
+  Variant[Array[String], String]                              $admin_users                      = $ejabberd::params::admin_users,
 ) inherits ejabberd::params {
   class { 'ejabberd::install':
     package_ensure   => $package_ensure,
   }
 
   class { 'ejabberd::config':
-    ejabberd_group           => $ejabberd_group,
-    log_level                => $log_level,
-    log_rotate_count         => $log_rotate_count,
-    domains                  => $domains,
-    tls_options              => $tls_options,
-    servercertfile           => $servercertfile,
-    auth_method              => $auth_method,
-    auth_attrs               => $auth_attrs,
-    db_backend               => $db_backend,
-    db_params                => $db_params,
-    enable_stun              => $enable_stun,
-    language                 => $language,
-    transports               => $transports,
-    mod_register_ips         => $mod_register_ips,
-    mod_register_subject     => $mod_register_subject,
-    mod_register_body        => $mod_register_body,
-    enable_mod_proxy65       => $enable_mod_proxy65,
-    mod_proxy65_access       => $mod_proxy65_access,
-    mod_proxy65_connections  => $mod_proxy65_connections,
-    enable_mod_ping          => $enable_mod_ping,
-    mod_ping_ack_timeout     => $mod_ping_ack_timeout,
-    mod_ping_interval        => $mod_ping_interval,
-    mod_ping_timeout_action  => $mod_ping_timeout_action,
-    enable_mod_version       => $enable_mod_version,
-    enable_mod_vcard         => $enable_mod_vcard,
-    mod_vcard_search_enable  => $mod_vcard_search_enable,
-    mod_vcard_xupdate_enable => $mod_vcard_xupdate_enable,
-    enable_mod_avatar        => $enable_mod_avatar,
-    admin_users              => $admin_users,
+    ejabberd_group                   => $ejabberd_group,
+    log_level                        => $log_level,
+    log_rotate_count                 => $log_rotate_count,
+    domains                          => $domains,
+    tls_options                      => $tls_options,
+    servercertfile                   => $servercertfile,
+    auth_method                      => $auth_method,
+    auth_attrs                       => $auth_attrs,
+    db_backend                       => $db_backend,
+    db_params                        => $db_params,
+    enable_stun                      => $enable_stun,
+    language                         => $language,
+    transports                       => $transports,
+    enable_mod_register              => $enable_mod_register,
+    enable_mod_register_web          => $enable_mod_register_web,
+    mod_register_ips_allowed         => $mod_register_ips_allowed,
+    mod_register_welcome_msg_subject => $mod_register_welcome_msg_subject,
+    mod_register_welcome_msg_body    => $mod_register_welcome_msg_body,
+    enable_mod_proxy65               => $enable_mod_proxy65,
+    mod_proxy65_access               => $mod_proxy65_access,
+    mod_proxy65_connections          => $mod_proxy65_connections,
+    enable_mod_ping                  => $enable_mod_ping,
+    mod_ping_ack_timeout             => $mod_ping_ack_timeout,
+    mod_ping_interval                => $mod_ping_interval,
+    mod_ping_timeout_action          => $mod_ping_timeout_action,
+    enable_mod_version               => $enable_mod_version,
+    enable_mod_vcard                 => $enable_mod_vcard,
+    mod_vcard_search_enable          => $mod_vcard_search_enable,
+    mod_vcard_xupdate_enable         => $mod_vcard_xupdate_enable,
+    enable_mod_avatar                => $enable_mod_avatar,
+    admin_users                      => $admin_users,
   }
 
   class { 'ejabberd::certificate':
