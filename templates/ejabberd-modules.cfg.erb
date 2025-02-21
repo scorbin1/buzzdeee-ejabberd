@@ -90,7 +90,7 @@ modules:
     ## https://github.com/ge0rg/jabber-spam-fighting-manifesto
 <%- unless @mod_register_ips_allowed.empty? -%>    ip_access: <%= @mod_register_ips_allowed %>
 <%- end -%>
-<%- unless @mod_register_welcome_msg_subject.empty? and @mod_register_welcome_msg_body.empty? -%>    welcome_msg:
+<%- unless @mod_register_welcome_msg_subject.empty? and @mod_register_welcome_msg_body.empty? -%>    welcome_message:
 <%- end -%>
 <%- unless @mod_register_welcome_msg_subject.empty? -%>      subject: "<%= @mod_register_welcome_msg_subject %>"
 <%- end -%>
