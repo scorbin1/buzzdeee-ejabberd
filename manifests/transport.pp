@@ -26,13 +26,13 @@
 #
 case $facts['os']['family'] {
   'Debian': {
-    $config_filename = '/etc/ejabberd/ejabberd.yml'
-    $config_set      = '.Debian'
+    $config_filename           = '/etc/ejabberd/ejabberd.yml'
+    $transport_config_template = $facts['os']['family']
   }
 
   default: {
-    $config_filename = '/etc/ejabberd/ejabberd.cfg'
-    $config_set      = ''
+    $config_filename           = '/etc/ejabberd/ejabberd.cfg'
+    $transport_config_template = 'default'
   }
 }
 
@@ -43,7 +43,7 @@ define ejabberd::transport (
 ) {
   concat::fragment { "ejabberd-transport-${title}":
     target  => $ejabberd::config_filename,
-    content => template("ejabberd/ejabberd-transport.cfg.${config_set}.erb"),
+    content => template("ejabberd/ejabberd-transport.cfg.${ejabberd::transport::transport_config_template}.erb"),
     order   => '10',
   }
 }
