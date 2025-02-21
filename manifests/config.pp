@@ -37,17 +37,7 @@ class ejabberd::config (
   Boolean                                                     $enable_mod_avatar,
   Variant[Array[String], String]                              $admin_users,
 ) {
-  case $facts['os']['family'] {
-    'Debian': {
-      $config_filename = '/etc/ejabberd/ejabberd.yml'
-      $config_set      = '.Debian'
-    }
-
-    default: {
-      $config_filename = '/etc/ejabberd/ejabberd.cfg'
-      $config_set      = ''
-    }
-  }
+  $config_filename = '/etc/ejabberd/ejabberd.yml'
 
   concat { $config_filename:
     ensure => 'present',
@@ -58,13 +48,13 @@ class ejabberd::config (
 
   concat::fragment { 'ejabberd-general':
     target  => $config_filename,
-    content => template("ejabberd/ejabberd-general.cfg${config_set}.erb"),
+    content => template('ejabberd/ejabberd-general.cfg.erb'),
     order   => '01',
   }
 
   concat::fragment { 'ejabberd-ports':
     target  => $config_filename,
-    content => template("ejabberd/ejabberd-ports.cfg${config_set}.erb"),
+    content => template('ejabberd/ejabberd-ports.cfg.erb'),
     order   => '02',
   }
 
@@ -74,27 +64,27 @@ class ejabberd::config (
 
   concat::fragment { 'ejabberd-encryption':
     target  => $config_filename,
-    content => template("ejabberd/ejabberd-encryption.cfg${config_set}.erb"),
+    content => template('ejabberd/ejabberd-encryption.cfg.erb'),
     order   => '20',
   }
 
   concat::fragment { 'ejabberd-acls':
     target  => $config_filename,
-    content => template("ejabberd/ejabberd-acls.cfg${config_set}.erb"),
+    content => template('ejabberd/ejabberd-acls.cfg.erb'),
     order   => '30',
   }
 
   if $facts['os']['family'] != 'Debian' {
     concat::fragment { 'ejabberd-authentication':
       target  => $config_filename,
-      content => template("ejabberd/ejabberd-auth-${auth_method}.cfg${config_set}.erb"),
+      content => template("ejabberd/ejabberd-auth-${auth_method}.cfg.erb"),
       order   => '40',
     }
 
     if $db_backend != 'mnesia' {
       concat::fragment { 'ejabberd-database':
         target  => $config_filename,
-        content => template("ejabberd/ejabberd-db-${db_backend}.cfg${config_set}.erb"),
+        content => template("ejabberd/ejabberd-db-${db_backend}.cfg.erb"),
         order   => '50',
       }
     }
@@ -102,19 +92,19 @@ class ejabberd::config (
 
   concat::fragment { 'ejabberd-shaper':
     target  => $config_filename,
-    content => template("ejabberd/ejabberd-shaper.cfg${config_set}.erb"),
+    content => template('ejabberd/ejabberd-shaper.cfg.erb'),
     order   => '60',
   }
 
   concat::fragment { 'ejabberd-modules':
     target  => $config_filename,
-    content => template("ejabberd/ejabberd-modules.cfg${config_set}.erb"),
+    content => template('ejabberd/ejabberd-modules.cfg.erb'),
     order   => '70',
   }
 
   concat::fragment { 'ejabberd-end':
     target  => $config_filename,
-    content => template("ejabberd/ejabberd-end.cfg${config_set}.erb"),
+    content => template('ejabberd/ejabberd-end.cfg.erb'),
     order   => '80',
   }
 }
