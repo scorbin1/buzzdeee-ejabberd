@@ -41,9 +41,9 @@ class ejabberd::config (
 
   concat { $config_filename:
     ensure => 'present',
-    owner  => 'root',
+    owner  => 'ejabberd',
     group  => $ejabberd_group,
-    mode   => '0640',
+    mode   => '0600',
   }
 
   concat::fragment { 'ejabberd-general':
