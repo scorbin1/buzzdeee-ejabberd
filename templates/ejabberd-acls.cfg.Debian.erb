@@ -3,8 +3,8 @@ acl:
   admin:
      user:
 <% if @admin_users.is_a? Array -%>
-<%- @admin_users.length; i=0; @admin_users.each do |admin_user| -%>
-       - "<%= @admin_user -%>"
+<%- @admin_users.each do |admin_user| -%>
+       - "<%= admin_user -%>"
 <%- end -%>
 <%- else -%>
        - "<%= @admin_users %>"
