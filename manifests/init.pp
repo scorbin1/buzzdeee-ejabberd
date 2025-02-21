@@ -254,6 +254,11 @@
 #   Default Value: true
 #   Description: Whether to enable mod_avatar(reqires mod_vcard)
 #
+# @param admin_users
+#   Type: Variant[Array[String], String]
+#   Default Value: ""
+#   Description: users allowed to admin the server
+#
 # === Examples
 #
 #  class { 'ejabberd':
@@ -323,6 +328,7 @@ class ejabberd (
   Boolean                                                     $mod_vcard_search_enable      = $ejabberd::params::mod_vcard_search_enable,
   Boolean                                                     $mod_vcard_xupdate_enable     = $ejabberd::params::mod_vcard_xupdate_enable,
   Boolean                                                     $enable_mod_avatar            = $ejabberd::params::enable_mod_avatar,
+  Variant[Array[String], String]                              $admin_users                  = $ejabberd::params::admin_users,
 ) inherits ejabberd::params {
   class { 'ejabberd::install':
     package_ensure   => $package_ensure,
@@ -357,6 +363,7 @@ class ejabberd (
     mod_vcard_search_enable  => $mod_vcard_search_enable,
     mod_vcard_xupdate_enable => $mod_vcard_xupdate_enable,
     enable_mod_avatar        => $enable_mod_avatar,
+    admin_users              => $admin_users,
   }
 
   class { 'ejabberd::certificate':

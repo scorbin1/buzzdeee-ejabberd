@@ -180,6 +180,7 @@ class ejabberd::config (
   Boolean                                                     $mod_vcard_search_enable,
   Boolean                                                     $mod_vcard_xupdate_enable,
   Boolean                                                     $enable_mod_avatar,
+  Variant[Array[String], String]                              $admin_users,
 ) {
   case $facts['os']['family'] {
     'Debian': {

@@ -68,4 +68,5 @@ class ejabberd::params {
   $mod_vcard_search_enable  = false
   $mod_vcard_xupdate_enable = true
   $enable_mod_avatar        = true
+  $admin_users              = ''
 }
