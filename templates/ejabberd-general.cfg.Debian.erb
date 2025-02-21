@@ -44,7 +44,7 @@ certfiles:
 <%- if @servercertfile == '/etc/ejabberd/ejabberd.pem' -%>
 #  - /etc/letsencrypt/live/localhost/fullchain.pem
 #  - /etc/letsencrypt/live/localhost/privkey.pem
-<%- end -%>
+<% end %>
 # TLS configuration
 define_macro:
   'TLS_CIPHERS': "HIGH:!aNULL:!eNULL:!3DES:@STRENGTH"
