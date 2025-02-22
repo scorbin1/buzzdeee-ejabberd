@@ -289,6 +289,26 @@
 #   Default Value: false
 #   Description: Whether to enable mod_muc_log_http
 #
+# @param enable_mod_pres_counter
+#   Type: Boolean
+#   Default Value: true
+#   Description: Whether to enable mod_pres_counter
+#
+# @param mod_pres_counter_count
+#   Type: Integer
+#   Default Value: 5
+#   Description: The number of subscription presence stanzas
+#                (subscribe, unsubscribe, subscribed, unsubscribed)
+#                allowed for any direction (input or output) per
+#                time defined in interval option. Please note that
+#                two users subscribing to each other usually generate
+#                4 stanzas, so the recommended value is 4 or more.
+#
+# @param mod_pres_counter_interval
+#   Type: Integer
+#   Default Value: 60
+#   Description: The time interval
+#
 # === Examples
 #
 #  class { 'ejabberd':
@@ -365,6 +385,9 @@ class ejabberd (
   Boolean                                                     $enable_mod_pottymouth            = $ejabberd::params::enable_mod_pottymouth,
   Boolean                                                     $enable_mod_s2s_log               = $ejabberd::params::enable_mod_s2s_log,
   Boolean                                                     $enable_mod_muc_log_http          = $ejabberd::params::enable_mod_muc_log_http,
+  Boolean                                                     $enable_mod_pres_counter          = $ejabberd::params::enable_mod_pres_counter,
+  Integer                                                     $mod_pres_counter_count           = $ejabberd::params::mod_pres_counter_count,
+  Integer                                                     $mod_pres_counter_interval        = $ejabberd::params::mod_pres_counter_interval,
 ) inherits ejabberd::params {
   class { 'ejabberd::install':
     package_ensure   => $package_ensure,
@@ -406,6 +429,9 @@ class ejabberd (
     enable_mod_pottymouth            => $enable_mod_pottymouth,
     enable_mod_s2s_log               => $enable_mod_s2s_log,
     enable_mod_muc_log_http          => $enable_mod_muc_log_http,
+    enable_mod_pres_counter          => $enable_mod_pres_counter,
+    mod_pres_counter_count           => $mod_pres_counter_count,
+    mod_pres_counter_interval        => $mod_pres_counter_interval,
   }
 
   class { 'ejabberd::certificate':

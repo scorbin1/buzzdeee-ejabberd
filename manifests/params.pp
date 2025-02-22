@@ -75,4 +75,7 @@ class ejabberd::params {
   $enable_mod_pottymouth            = false
   $enable_mod_s2s_log               = false
   $enable_mod_muc_log_http          = false
+  $enable_mod_pres_counter          = true
+  $mod_pres_counter_count           = 5
+  $mod_pres_counter_interval        = 60
 }

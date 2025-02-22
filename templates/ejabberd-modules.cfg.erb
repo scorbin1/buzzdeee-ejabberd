@@ -55,9 +55,11 @@ modules:
 <%- end -%>
 <%- else -%>  mod_ping: {}
 <%- end -%>
+<%- if @enable_mod_pres_counter -%>
   mod_pres_counter:
-    count: 5
-    interval: 60
+    count: <%= @mod_pres_counter_count %>
+    interval: <%= @mod_pres_counter_interval %>
+<%- end -%>
   mod_privacy: {}
   mod_private: {}
 <% if @enable_mod_proxy65 %>

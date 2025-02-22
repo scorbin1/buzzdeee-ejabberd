@@ -40,6 +40,9 @@ class ejabberd::config (
   Boolean                                                     $enable_mod_pottymouth,
   Boolean                                                     $enable_mod_s2s_log,
   Boolean                                                     $enable_mod_muc_log_http,
+  Boolean                                                     $enable_mod_pres_counter,
+  Integer                                                     $mod_pres_counter_count,
+  Integer                                                     $mod_pres_counter_interval,
 ) {
   $config_filename = '/etc/ejabberd/ejabberd.yml'
 
