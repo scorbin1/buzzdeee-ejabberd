@@ -96,7 +96,7 @@ class ejabberd::params {
   $enable_mod_privacy               = true
   $enable_mod_private               = true
   $enable_mod_push                  = true
-  $enable_enable_mod_push_keepalive = true
+  $enable_mod_push_keepalive        = true
   $enable_mod_s2s_dialback          = true
   $enable_mod_shared_roster         = true
   $enable_mod_sic                   = true
