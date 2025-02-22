@@ -1,28 +1,43 @@
 
 modules:
-  mod_adhoc: {}
-  mod_admin_extra: {}
+<%- if @enable_mod_adhoc -%>  mod_adhoc: {}
+<%- end -%>
+<%- if @enable_mod_admin_extra -%>  mod_admin_extra: {}
+<%- end -%>
   mod_announce:
     access: announce
   <%- if @enable_mod_vcard and @enable_mod_avatar -%>  mod_avatar: {}
   <%- end -%>
-  mod_blocking: {}
-  mod_bosh: {}
-  mod_caps: {}
-  mod_carboncopy: {}
-  mod_client_state: {}
-  mod_configure: {}
+<%- if @enable_mod_blocking -%>  mod_blocking: {}
+<%- end -%>
+<%- if @enable_mod_bosh -%>  mod_bosh: {}
+<%- end -%>
+<%- if @enable_mod_caps -%>  mod_caps: {}
+<%- end -%>
+<%- if @enable_mod_carboncopy -%>  mod_carboncopy: {}
+<%- end -%>
+<%- if @enable_mod_client_state -%>  mod_client_state: {}
+<%- end -%>
+<%- if @enable_mod_configure -%>  mod_configure: {}
+<%- end -%>
+<%- if @enable_mod_delegation -%>  mod_delegation: {}   # for xep0356
+<%- else -%>
   ## mod_delegation: {}   # for xep0356
-  mod_disco: {}
-  mod_fail2ban: {}
-  mod_http_api: {}
+<%- end -%>
+<%- if @enable_mod_disco -%>  mod_disco: {}
+<%- end -%>
+<%- if @enable_mod_fail2ban -%>  mod_fail2ban: {}
+<%- end -%>
+<%- if @mod_http_api -%>  mod_http_api: {}
+<%- end -%>
   ## mod_http_upload:
   ##   put_url: https://@HOST@:5443/upload
   ##   custom_headers:
   ##     "Access-Control-Allow-Origin": "https://@HOST@"
   ##     "Access-Control-Allow-Methods": "GET,HEAD,PUT,OPTIONS"
   ##     "Access-Control-Allow-Headers": "Content-Type"
-  mod_last: {}
+<%- if @enable_mod_last -%>  mod_last: {}
+<%- end -%>
   ## mod_mam:
   ##   ## Mnesia is limited to 2GB, better to use an SQL backend
   ##   ## For small servers SQLite is a good fit and is very easy
@@ -30,7 +45,8 @@ modules:
   ##   ## db_type: sql
   ##   assume_mam_usage: true
   ##   default: always
-  mod_mqtt: {}
+<%- if @enable_mod_mqtt -%>  mod_mqtt: {}
+<%- end -%>
   mod_muc:
     access:
       - allow
@@ -42,7 +58,8 @@ modules:
       - allow
     default_room_options:
       mam: true
-  mod_muc_admin: {}
+<%- if @enable_mod_muc_admin -%>  mod_muc_admin: {}
+<%- end -%>
   mod_offline:
     access_max_user_messages: max_user_offline_messages
 <%- if @enable_mod_ping -%>  mod_ping: 
@@ -64,8 +81,10 @@ modules:
 ##    count: 5
 ##    interval: 60
 <%- end -%>
-  mod_privacy: {}
-  mod_private: {}
+<%- if @enable_mod_privacy -%>  mod_privacy: {}
+<%- end -%>
+<%- if @enable_mod_private -%>  mod_private: {}
+<%- end -%>
 <% if @enable_mod_proxy65 %>
   mod_proxy65:
     access: <%= @mod_proxy65_access %>
@@ -85,8 +104,10 @@ modules:
       ## Avoid buggy clients to make their bookmarks public
       storage:bookmarks:
         access_model: whitelist
-  mod_push: {}
-  mod_push_keepalive: {}
+<%- if @enable_mod_push -%>  mod_push: {}
+<%- end -%>
+<%- if @enable_mod_push_keepalive -%>  mod_push_keepalive: {}
+<%- end -%>
 <% if @enable_mod_register %>
   mod_register:
     ## Only accept registration requests from the "trusted"
@@ -113,12 +134,16 @@ modules:
 <%- end -%>
   mod_roster:
     versioning: true
-  mod_s2s_dialback: {}
-  mod_shared_roster: {}
-  mod_sic: {}
+<%- if @enable_mod_s2s_dialback -%>  mod_s2s_dialback: {}
+<%- end -%>
+<%- if @enable_mod_shared_roster -%>  mod_shared_roster: {}
+<%- end -%>
+<%- if @enable_mod_sic -%>  mod_sic: {}
+<%- end -%>
   mod_stream_mgmt:
     resend_on_timeout: if_offline
-  mod_stun_disco: {}
+<%- if @enable_mod_stun_disco -%>  mod_stun_disco: {}
+<%- end -%>
 <%- if @enable_mod_vcard -%>  mod_vcard:
     search: <%= @mod_vcard_search_enable %>
 <%- if @mod_vcard_xupdate_enable -%>  mod_vcard_xupdate: {}

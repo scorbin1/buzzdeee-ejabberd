@@ -78,4 +78,27 @@ class ejabberd::params {
   $enable_mod_pres_counter          = true
   $mod_pres_counter_count           = 5
   $mod_pres_counter_interval        = 60
+  $enable_mod_adhoc                 = true
+  $enable_mod_admin_extra           = true
+  $enable_mod_blocking              = true
+  $enable_mod_bosh                  = true
+  $enable_mod_caps                  = true
+  $enable_mod_carboncopy            = true
+  $enable_mod_client_state          = true
+  $enable_mod_configure             = true
+  $enable_mod_delegation            = false
+  $enable_mod_disco                 = true
+  $enable_mod_fail2ban              = true
+  $enable_mod_http_api              = true
+  $enable_mod_last                  = true
+  $enable_mod_mqtt                  = true
+  $enable_mod_muc_admin             = true
+  $enable_mod_privacy               = true
+  $enable_mod_private               = true
+  $enable_mod_push                  = true
+  $enable_enable_mod_push_keepalive = true
+  $enable_mod_s2s_dialback          = true
+  $enable_mod_shared_roster         = true
+  $enable_mod_sic                   = true
+  $enable_mod_stun_disco            = true
 }

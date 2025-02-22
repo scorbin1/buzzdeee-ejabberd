@@ -309,6 +309,121 @@
 #   Default Value: 60
 #   Description: The time interval
 #
+# @param enable_mod_adhoc
+#   Type: Boolean
+#   Default Value: true
+#   Description: Whether to enable mod_adhoc
+#
+# @param enable_mod_admin_extra
+#   Type: Boolean
+#   Default Value: true
+#   Description: Whether to enable mod_admin_extra
+#
+# @param enable_mod_blocking
+#   Type: Boolean
+#   Default Value: true
+#   Description: Whether to enable mod_blocking
+#
+# @param enable_mod_bosh
+#   Type: Boolean
+#   Default Value: true
+#   Description: Whether to enable mod_bosh
+#
+# @param enable_mod_caps
+#   Type: Boolean
+#   Default Value: true
+#   Description: Whether to enable mod_caps
+#
+# @param enable_mod_carboncopy
+#   Type: Boolean
+#   Default Value: true
+#   Description: Whether to enable mod_carboncopy
+#
+# @param enable_mod_client_state
+#   Type: Boolean
+#   Default Value: true
+#   Description: Whether to enable mod_pres_counter
+#
+# @param enable_mod_configure
+#   Type: Boolean
+#   Default Value: true
+#   Description: Whether to enable mod_configure
+#
+# @param enable_mod_delegation
+#   Type: Boolean
+#   Default Value: false
+#   Description: Whether to enable mod_delegation
+#
+# @param enable_mod_disco
+#   Type: Boolean
+#   Default Value: true
+#   Description: Whether to enable mod_disco
+#
+# @param enable_mod_fail2ban
+#   Type: Boolean
+#   Default Value: true
+#   Description: Whether to enable mod_fail2ban
+#
+# @param enable_mod_http_api
+#   Type: Boolean
+#   Default Value: true
+#   Description: Whether to enable mod_http_api
+#
+# @param enable_mod_last
+#   Type: Boolean
+#   Default Value: true
+#   Description: Whether to enable mod_last
+#
+# @param enable_mod_mqtt
+#   Type: Boolean
+#   Default Value: true
+#   Description: Whether to enable mod_mqtt
+#
+# @param enable_mod_muc_admin
+#   Type: Boolean
+#   Default Value: true
+#   Description: Whether to enable mod_muc_admin
+#
+# @param enable_mod_privacy
+#   Type: Boolean
+#   Default Value: true
+#   Description: Whether to enable mod_privacy
+#
+# @param enable_mod_private
+#   Type: Boolean
+#   Default Value: true
+#   Description: Whether to enable mod_private
+#
+# @param enable_mod_push
+#   Type: Boolean
+#   Default Value: true
+#   Description: Whether to enable enable_mod_push
+#
+# @param enable_mod_push_keepalive
+#   Type: Boolean
+#   Default Value: true
+#   Description: Whether to enable mod_push_keepalive
+#
+# @param enable_mod_s2s_dialback
+#   Type: Boolean
+#   Default Value: true
+#   Description: Whether to enable mod_s2s_dialback
+#
+# @param enable_mod_shared_roster
+#   Type: Boolean
+#   Default Value: true
+#   Description: Whether to enable mod_shared_roster
+#
+# @param enable_mod_sic
+#   Type: Boolean
+#   Default Value: true
+#   Description: Whether to enable mod_sic
+#
+# @param enable_mod_stun_disco
+#   Type: Boolean
+#   Default Value: true
+#   Description: Whether to enable mod_stun_disco
+#
 # === Examples
 #
 #  class { 'ejabberd':
@@ -388,6 +503,29 @@ class ejabberd (
   Boolean                                                     $enable_mod_pres_counter          = $ejabberd::params::enable_mod_pres_counter,
   Integer                                                     $mod_pres_counter_count           = $ejabberd::params::mod_pres_counter_count,
   Integer                                                     $mod_pres_counter_interval        = $ejabberd::params::mod_pres_counter_interval,
+  Boolean                                                     $enable_mod_adhoc                 = $ejabberd::params::enable_mod_adhoc,
+  Boolean                                                     $enable_mod_admin_extra           = $ejabberd::params::enable_mod_admin_extra,
+  Boolean                                                     $enable_mod_blocking              = $ejabberd::params::enable_mod_blocking,
+  Boolean                                                     $enable_mod_bosh                  = $ejabberd::params::enable_mod_bosh,
+  Boolean                                                     $enable_mod_caps                  = $ejabberd::params::enable_mod_caps,
+  Boolean                                                     $enable_mod_carboncopy            = $ejabberd::params::enable_mod_carboncopy,
+  Boolean                                                     $enable_mod_client_state          = $ejabberd::params::enable_mod_client_state,
+  Boolean                                                     $enable_mod_configure             = $ejabberd::params::enable_mod_configure,
+  Boolean                                                     $enable_mod_delegation            = $ejabberd::params::enable_mod_delegation,
+  Boolean                                                     $enable_mod_disco                 = $ejabberd::params::enable_mod_disco,
+  Boolean                                                     $enable_mod_fail2ban              = $ejabberd::params::enable_mod_fail2ban,
+  Boolean                                                     $enable_mod_http_api              = $ejabberd::params::enable_mod_http_api,
+  Boolean                                                     $enable_mod_last                  = $ejabberd::params::enable_mod_last,
+  Boolean                                                     $enable_mod_mqtt                  = $ejabberd::params::enable_mod_mqtt,
+  Boolean                                                     $enable_mod_muc_admin             = $ejabberd::params::enable_mod_muc_admin,
+  Boolean                                                     $enable_mod_privacy               = $ejabberd::params::enable_mod_privacy,
+  Boolean                                                     $enable_mod_private               = $ejabberd::params::enable_mod_private,
+  Boolean                                                     $enable_mod_push                  = $ejabberd::params::enable_mod_push,
+  Boolean                                                     $enable_mod_push_keepalive        = $ejabberd::params::enable_enable_mod_push_keepalive,
+  Boolean                                                     $enable_mod_s2s_dialback          = $ejabberd::params::enable_mod_s2s_dialback,
+  Boolean                                                     $enable_mod_shared_roster         = $ejabberd::params::enable_mod_shared_roster,
+  Boolean                                                     $enable_mod_sic                   = $ejabberd::params::enable_mod_sic,
+  Boolean                                                     $enable_mod_stun_disco            = $ejabberd::params::enable_mod_stun_disco,
 ) inherits ejabberd::params {
   class { 'ejabberd::install':
     package_ensure   => $package_ensure,
@@ -432,6 +570,29 @@ class ejabberd (
     enable_mod_pres_counter          => $enable_mod_pres_counter,
     mod_pres_counter_count           => $mod_pres_counter_count,
     mod_pres_counter_interval        => $mod_pres_counter_interval,
+    enable_mod_adhoc                 => $enable_mod_adhoc,
+    enable_mod_admin_extra           => $enable_mod_admin_extra,
+    enable_mod_blocking              => $enable_mod_blocking,
+    enable_mod_bosh                  => $enable_mod_bosh,
+    enable_mod_caps                  => $enable_mod_caps,
+    enable_mod_carboncopy            => $enable_mod_carboncopy,
+    enable_mod_client_state          => $enable_mod_client_state,
+    enable_mod_configure             => $enable_mod_configure,
+    enable_mod_delegation            => $enable_mod_delegation,
+    enable_mod_disco                 => $enable_mod_disco,
+    enable_mod_fail2ban              => $enable_mod_fail2ban,
+    enable_mod_http_api              => $enable_mod_http_api,
+    enable_mod_last                  => $enable_mod_last,
+    enable_mod_mqtt                  => $enable_mod_mqtt,
+    enable_mod_muc_admin             => $enable_mod_muc_admin,
+    enable_mod_privacy               => $enable_mod_privacy,
+    enable_mod_private               => $enable_mod_private,
+    enable_mod_push                  => $enable_mod_push,
+    enable_enable_mod_push_keepalive => $enable_mod_push_keepalive,
+    enable_mod_s2s_dialback          => $enable_mod_s2s_dialback,
+    enable_mod_shared_roster         => $enable_mod_shared_roster,
+    enable_mod_sic                   => $enable_mod_sic,
+    enable_mod_stun_disco            => $enable_mod_stun_disco,
   }
 
   class { 'ejabberd::certificate':
