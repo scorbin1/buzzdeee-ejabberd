@@ -424,6 +424,36 @@
 #   Default Value: true
 #   Description: Whether to enable mod_stun_disco
 #
+# @param mod_muc_users_acl
+#   Type: Variant[String]
+#   Default Value: ""
+#   Description: users or user lists allowed to access multi user chats
+#
+# @param mod_muc_admin_acl
+#   Type: Variant[String]
+#   Default Value: ""
+#   Description: users or user lists allowed to admin multi user chats
+#
+# @param mod_muc_create_acl
+#   Type: Variant[String]
+#   Default Value: ""
+#   Description: users or user lists allowed to create multi user chats
+#
+# @param mod_muc_persistent_acl
+#   Type: Variant[String]
+#   Default Value: ""
+#   Description: users or user lists allowed to admin persistent rooms
+#
+# @param mod_muc_mam_acl
+#   Type: Variant[String]
+#   Default Value: ""
+#   Description: users or user lists allowed to access multi user chats
+#
+# @param mod_muc_default_room_mam
+#   Type: Boolean
+#   Default Value: true
+#   Description: Whether to enable message archiving
+#
 # === Examples
 #
 #  class { 'ejabberd':
@@ -526,6 +556,12 @@ class ejabberd (
   Boolean                                                     $enable_mod_shared_roster         = $ejabberd::params::enable_mod_shared_roster,
   Boolean                                                     $enable_mod_sic                   = $ejabberd::params::enable_mod_sic,
   Boolean                                                     $enable_mod_stun_disco            = $ejabberd::params::enable_mod_stun_disco,
+  String                                                      $mod_muc_users_acl                = $ejabberd::params::mod_muc_users_acl,
+  String                                                      $mod_muc_admin_acl                = $ejabberd::params::mod_muc_admin_acl,
+  String                                                      $mod_muc_create_acl               = $ejabberd::params::mod_muc_create_acl,
+  String                                                      $mod_muc_persistent_acl           = $ejabberd::params::mod_muc_persistent_acl,
+  String                                                      $mod_muc_mam_acl                  = $ejabberd::params::mod_muc_mam_acl,
+  Boolean                                                     $mod_muc_default_room_mam         = $ejabberd::params::mod_muc_default_room_mam,
 ) inherits ejabberd::params {
   class { 'ejabberd::install':
     package_ensure   => $package_ensure,
@@ -593,6 +629,12 @@ class ejabberd (
     enable_mod_shared_roster         => $enable_mod_shared_roster,
     enable_mod_sic                   => $enable_mod_sic,
     enable_mod_stun_disco            => $enable_mod_stun_disco,
+    mod_muc_users_acl                => $mod_muc_users_acl,
+    mod_muc_admin_acl                => $mod_muc_admin_acl,
+    mod_muc_create_acl               => $mod_muc_create_acl,
+    mod_muc_persistent_acl           => $mod_muc_persistent_acl,
+    mod_muc_mam_acl                  => $mod_muc_mam_acl,
+    mod_muc_default_room_mam         => $mod_muc_default_room_mam,
   }
 
   class { 'ejabberd::certificate':

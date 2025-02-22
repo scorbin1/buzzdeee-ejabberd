@@ -101,4 +101,10 @@ class ejabberd::params {
   $enable_mod_shared_roster         = true
   $enable_mod_sic                   = true
   $enable_mod_stun_disco            = true
+  $mod_muc_users_acl                = 'allow'
+  $mod_muc_admin_acl                = 'admin'
+  $mod_muc_create_acl               = 'muc_create'
+  $mod_muc_persistent_acl           = 'muc_create'
+  $mod_muc_mam_acl                  = 'allow'
+  $mod_muc_default_room_mam         = true
 }

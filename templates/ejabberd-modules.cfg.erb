@@ -61,15 +61,16 @@ modules:
 <%- end -%>
   mod_muc:
     access:
-      - allow
+      - <%= @mod_muc_users_acl %>
     access_admin:
-      - allow: admin
-    access_create: muc_create
-    access_persistent: muc_create
+      - allow: <%= @mod_muc_admin_acl %>
+    access_create: <%= @mod_muc_create_acl %>
+    access_persistent: <%= @mod_muc_persistent_acl %>
     access_mam:
-      - allow
+      - <%= @mod_muc_mam_acl %>
     default_room_options:
-      mam: true
+      mam: <%= @mod_muc_default_room_mam %>
+<%- end -%>
 <%- if @enable_mod_muc_admin -%>  mod_muc_admin: {}
 <%- else -%>  ## mod_muc_admin: {}
 <%- end -%>
