@@ -66,6 +66,12 @@ class ejabberd::config (
   Boolean                                                     $enable_mod_shared_roster,
   Boolean                                                     $enable_mod_sic,
   Boolean                                                     $enable_mod_stun_disco,
+  String                                                      $mod_muc_users_acl,
+  String                                                      $mod_muc_admin_acl,
+  String                                                      $mod_muc_create_acl,
+  String                                                      $mod_muc_persistent_acl,
+  String                                                      $mod_muc_mam_acl,
+  Boolean                                                     $mod_muc_default_room_mam,
 ) {
   $config_filename = '/etc/ejabberd/ejabberd.yml'
 
