@@ -125,7 +125,7 @@ modules:
 <%- if @enable_mod_push_keepalive -%>  mod_push_keepalive: {}
 <%- else -%>  ## mod_push_keepalive: {}
 <%- end -%>
-<% if @enable_mod_register %>
+<%- if @enable_mod_register -%>
   mod_register:
     ## Only accept registration requests from the "trusted"
     ## network (see access_rules section above).
