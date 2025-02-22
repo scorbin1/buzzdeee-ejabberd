@@ -37,7 +37,7 @@ modules:
 <%- if @enable_mod_fail2ban -%>  mod_fail2ban: {}
 <%- else -%>  ## mod_fail2ban: {}
 <%- end -%>
-<%- if @mod_http_api -%>  mod_http_api: {}
+<%- if @enable_mod_http_api -%>  mod_http_api: {}
 <%- else -%>  ## mod_http_api: {}
 <%- end -%>
   ## mod_http_upload:
