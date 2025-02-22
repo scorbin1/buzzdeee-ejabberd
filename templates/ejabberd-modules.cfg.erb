@@ -59,6 +59,10 @@ modules:
   mod_pres_counter:
     count: <%= @mod_pres_counter_count %>
     interval: <%= @mod_pres_counter_interval %>
+<%- else -%>
+##  mod_pres_counter:
+##    count: 5
+##    interval: 60
 <%- end -%>
   mod_privacy: {}
   mod_private: {}
