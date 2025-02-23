@@ -4,10 +4,22 @@ acl:
      user:
 <% if @admin_users.is_a? Array -%>
 <%- @admin_users.each do |admin_user| -%>
-       - "<%= admin_user -%>"
+<% if @domains.is_a? Array -%>
+<%- @domains.each do |domain| -%>
+       - "<%= admin_user %>@<%= domain %>"
+<%- end -%>       
+<%- else -%>
+       - "<%= admin_user %>@<%= @domains %>"
+<%- end -%>
 <%- end -%>
 <%- else -%>
-       - "<%= @admin_users %>"
+<% if @domains.is_a? Array -%>
+<%- @domains.each do |domain| -%>
+       - "<%= @admin_users %>@<%= domain %>"
+<%- end -%>
+<%- else -%>
+       - "<%= @admin_users %>@<%= @domains %>"
+<%- end -%>
 <%- end -%>
 
   local:
