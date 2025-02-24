@@ -49,6 +49,11 @@
 #   Default Value: defined by calling class
 #   Description: TCP port for ejabberd mqtt
 #
+# @param ejabberd_stun_port
+#   Type: Integer
+#   Default Value: defined by calling class
+#   Description: TCP port for ejabberd stun
+#
 class ejabberd::firewall (
   Boolean $enable,
   Array   $ejabberd_allowed_clients,
@@ -58,7 +63,8 @@ class ejabberd::firewall (
   Integer $ejabberd_xmpps_port,
   Integer $ejabberd_xmpp_s2s_port,
   Integer $ejabberd_xmpp_admin_ui_port,
-  Integer $ejabberd_mqtt_port
+  Integer $ejabberd_mqtt_port,
+  Integer $ejabberd_stun_port,
 ) {
   if $enable {
     ## Setup firewall for ejabberd server
@@ -115,6 +121,15 @@ class ejabberd::firewall (
           chain   => 'INPUT',
           dport   => $ejabberd_mqtt_port,
           proto   => 'tcp',
+          ctstate => 'NEW',
+          jump    => accept,
+        }
+
+        # ejabberd - stun - UDP 3478
+        firewall { "${ejabberd_firewall_rule_order} ejabberd stun from ${client}":
+          chain   => 'INPUT',
+          dport   => $ejabberd_stun_port,
+          proto   => 'udp',
           ctstate => 'NEW',
           jump    => accept,
         }
@@ -176,6 +191,16 @@ class ejabberd::firewall (
           chain   => 'INPUT',
           dport   => $ejabberd_mqtt_port,
           proto   => 'tcp',
+          source  => $client,
+          ctstate => 'NEW',
+          jump    => accept,
+        }
+
+        # ejabberd - stun - UDP 3478
+        firewall { "${ejabberd_firewall_rule_order} ejabberd stun from ${client}":
+          chain   => 'INPUT',
+          dport   => $ejabberd_stun_port,
+          proto   => 'udp',
           source  => $client,
           ctstate => 'NEW',
           jump    => accept,

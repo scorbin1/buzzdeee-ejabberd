@@ -29,6 +29,7 @@ class ejabberd::params {
   $ejabberd_xmpp_s2s_port       = 5269
   $ejabberd_xmpp_admin_ui_port  = 5280
   $ejabberd_mqtt_port           = 1883
+  $ejabberd_stun_port           = 3478
 
   $log_level   = 'info'
   $domains     = ['localhost']

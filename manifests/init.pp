@@ -179,6 +179,11 @@
 #   Default value: '1883'
 #   ejabberd mqtt service port.
 #
+# @param ejabberd_stun_port
+#   Type: Integer
+#   Default Value: defined by calling class
+#   Description: TCP port for ejabberd stun
+#
 # @param enable_mod_register
 #   Type: Boolean
 #   Default Value: false
@@ -508,6 +513,7 @@ class ejabberd (
   Integer                                                     $ejabberd_xmpp_s2s_port           = $ejabberd::params::ejabberd_xmpp_s2s_port,
   Integer                                                     $ejabberd_xmpp_admin_ui_port      = $ejabberd::params::ejabberd_xmpp_admin_ui_port,
   Integer                                                     $ejabberd_mqtt_port               = $ejabberd::params::ejabberd_mqtt_port,
+  Integer                                                     $ejabberd_stun_port               = $ejabberd::params::ejabberd_stun_port,
   Boolean                                                     $enable_mod_register              = $ejabberd::params::enable_mod_register,
   Boolean                                                     $enable_mod_register_web          = $ejabberd::params::enable_mod_register_web,
   String                                                      $mod_register_ips_allowed         = $ejabberd::params::mod_register_ips_allowed,
@@ -653,6 +659,7 @@ class ejabberd (
     ejabberd_xmpp_s2s_port       => $ejabberd_xmpp_s2s_port,
     ejabberd_xmpp_admin_ui_port  => $ejabberd_xmpp_admin_ui_port,
     ejabberd_mqtt_port           => $ejabberd_mqtt_port,
+    ejabberd_stun_port           => $ejabberd_stun_port,
   }
 
   class { 'ejabberd::service':
