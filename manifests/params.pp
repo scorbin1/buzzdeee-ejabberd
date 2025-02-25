@@ -47,7 +47,7 @@ class ejabberd::params {
   }
   $db_backend                       = 'mnesia'
   $db_params                        = ''
-  $enable_stun                      = true
+  $enable_stun                      = false
   $language                         = 'en'
   $package_ensure                   = 'installed'
   $service_ensure                   = 'running'
@@ -101,7 +101,7 @@ class ejabberd::params {
   $enable_mod_s2s_dialback          = true
   $enable_mod_shared_roster         = true
   $enable_mod_sic                   = true
-  $enable_mod_stun_disco            = true
+  $enable_mod_stun_disco            = false
   $mod_muc_users_acl                = 'allow'
   $mod_muc_admin_acl                = 'admin'
   $mod_muc_create_acl               = 'muc_create'
