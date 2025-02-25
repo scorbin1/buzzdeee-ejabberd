@@ -658,6 +658,7 @@ class ejabberd (
 
   class { 'ejabberd::firewall':
     enable                       => $enable_firewall_rules,
+    disable_s2s                  => $disable_s2s,
     ejabberd_allowed_clients     => $ejabberd_allowed_clients,
     ejabberd_firewall_rule_order => $ejabberd_firewall_rule_order,
     ejabberd_port                => $ejabberd_port,

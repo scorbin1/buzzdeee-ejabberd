@@ -9,6 +9,11 @@
 #   Default Value: defined by calling class
 #   Description: Whether to enable firewall rule definition or not
 #
+# @param disable_s2s
+#   Type: Boolean
+#   Default Value: false
+#   Description: Whether to disable server to server communications
+#
 # @param ejabberd_allowed_clients
 #   Type: Array
 #   Default Value: defined by calling class
@@ -61,6 +66,7 @@
 #
 class ejabberd::firewall (
   Boolean $enable,
+  Boolean $disable_s2s,
   Array   $ejabberd_allowed_clients,
   Integer $ejabberd_firewall_rule_order,
   Integer $ejabberd_port,
@@ -174,14 +180,16 @@ class ejabberd::firewall (
           jump    => accept,
         }
 
-        # ejabberd - xmpp_s2s - TCP 5269
-        firewall { "${ejabberd_firewall_rule_order} ejabberd xmpp_s2s from ${client}":
-          chain   => 'INPUT',
-          dport   => $ejabberd_xmpp_s2s_port,
-          proto   => 'tcp',
-          source  => $client,
-          ctstate => 'NEW',
-          jump    => accept,
+        if $disable_s2s == false {
+          # ejabberd - xmpp_s2s - TCP 5269
+          firewall { "${ejabberd_firewall_rule_order} ejabberd xmpp_s2s from ${client}":
+            chain   => 'INPUT',
+            dport   => $ejabberd_xmpp_s2s_port,
+            proto   => 'tcp',
+            source  => $client,
+            ctstate => 'NEW',
+            jump    => accept,
+          }
         }
 
         # ejabberd - xmpp_admin_ui - TCP 5280
