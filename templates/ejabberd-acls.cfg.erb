@@ -2,9 +2,9 @@
 acl:
   admin:
      user:
-<% if @admin_users.is_a? Array -%>
+<%- if @admin_users.is_a? Array -%>
 <%- @admin_users.each do |admin_user| -%>
-<% if @domains.is_a? Array -%>
+<%- if @domains.is_a? Array -%>
 <%- @domains.each do |domain| -%>
        - "<%= admin_user %>@<%= domain %>"
 <%- end -%>       
@@ -13,7 +13,7 @@ acl:
 <%- end -%>
 <%- end -%>
 <%- else -%>
-<% if @domains.is_a? Array -%>
+<%- if @domains.is_a? Array -%>
 <%- @domains.each do |domain| -%>
        - "<%= @admin_users %>@<%= domain %>"
 <%- end -%>
