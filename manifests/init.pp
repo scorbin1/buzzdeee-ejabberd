@@ -659,6 +659,7 @@ class ejabberd (
     ejabberd_xmpp_s2s_port       => $ejabberd_xmpp_s2s_port,
     ejabberd_xmpp_admin_ui_port  => $ejabberd_xmpp_admin_ui_port,
     ejabberd_mqtt_port           => $ejabberd_mqtt_port,
+    enable_stun_firewall         => $enable_stun,
     ejabberd_stun_port           => $ejabberd_stun_port,
   }
 

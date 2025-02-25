@@ -49,6 +49,11 @@
 #   Default Value: defined by calling class
 #   Description: TCP port for ejabberd mqtt
 #
+# @param enable_stun_firewall
+#   Type: Boolean
+#   Default Value: defined by calling class. should generally track the enable_stun parameter
+#   Description: Whether to enable firewall rule definition for stun services
+#
 # @param ejabberd_stun_port
 #   Type: Integer
 #   Default Value: defined by calling class
@@ -64,6 +69,7 @@ class ejabberd::firewall (
   Integer $ejabberd_xmpp_s2s_port,
   Integer $ejabberd_xmpp_admin_ui_port,
   Integer $ejabberd_mqtt_port,
+  Boolean $enable_stun_firewall,
   Integer $ejabberd_stun_port,
 ) {
   if $enable {
@@ -125,13 +131,15 @@ class ejabberd::firewall (
           jump    => accept,
         }
 
-        # ejabberd - stun - UDP 3478
-        firewall { "${ejabberd_firewall_rule_order} ejabberd stun from ${client}":
-          chain   => 'INPUT',
-          dport   => $ejabberd_stun_port,
-          proto   => 'udp',
-          ctstate => 'NEW',
-          jump    => accept,
+        if $enable_stun_firewall {
+          # ejabberd - stun - UDP 3478
+          firewall { "${ejabberd_firewall_rule_order} ejabberd stun from ${client}":
+            chain   => 'INPUT',
+            dport   => $ejabberd_stun_port,
+            proto   => 'udp',
+            ctstate => 'NEW',
+            jump    => accept,
+          }
         }
       }
       else {
@@ -196,14 +204,16 @@ class ejabberd::firewall (
           jump    => accept,
         }
 
-        # ejabberd - stun - UDP 3478
-        firewall { "${ejabberd_firewall_rule_order} ejabberd stun from ${client}":
-          chain   => 'INPUT',
-          dport   => $ejabberd_stun_port,
-          proto   => 'udp',
-          source  => $client,
-          ctstate => 'NEW',
-          jump    => accept,
+        if $enable_stun_firewall {
+          # ejabberd - stun - UDP 3478
+          firewall { "${ejabberd_firewall_rule_order} ejabberd stun from ${client}":
+            chain   => 'INPUT',
+            dport   => $ejabberd_stun_port,
+            proto   => 'udp',
+            source  => $client,
+            ctstate => 'NEW',
+            jump    => accept,
+          }
         }
       }
     }
