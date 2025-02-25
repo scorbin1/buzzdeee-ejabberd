@@ -6,7 +6,8 @@ disable_sasl_mechanisms:
   - "digest-md5"
   - "X-OAUTH2"
 
-s2s_use_starttls: required
+<%- if @disable_s2s == false -%>s2s_use_starttls: required
+<%- end -%>
 
 ## Store the plain passwords or hashed for SCRAM:
 auth_password_format: scram

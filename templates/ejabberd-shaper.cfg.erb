@@ -12,4 +12,5 @@ shaper_rules:
   c2s_shaper:
     none: admin
     normal: all
-  s2s_shaper: fast
+<%- if @disable_s2s == false -%>  s2s_shaper: fast
+<%- end -%>

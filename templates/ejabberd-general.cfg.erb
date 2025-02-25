@@ -60,10 +60,13 @@ define_macro:
     # generated with: openssl dhparam -out dhparams.pem 2048
 
 c2s_ciphers: 'TLS_CIPHERS'
-s2s_ciphers: 'TLS_CIPHERS'
+<%- if @disable_s2s == false -%>s2s_ciphers: 'TLS_CIPHERS'
+<%- end -%>
 c2s_protocol_options: 'TLS_OPTIONS'
-s2s_protocol_options: 'TLS_OPTIONS'
+<%- if @disable_s2s == false -%>s2s_protocol_options: 'TLS_OPTIONS'
+<%- end -%>
 # c2s_dhfile: 'DH_FILE'
-# s2s_dhfile: 'DH_FILE'
+<%- if @disable_s2s == false -%># s2s_dhfile: 'DH_FILE'
+<%- end -%>
 
 <%- if @language != 'en' and @language != '' -%>language: <%= @language %><%- end -%>

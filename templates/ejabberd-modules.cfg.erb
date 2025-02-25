@@ -151,8 +151,10 @@ modules:
 <%- end -%>
   mod_roster:
     versioning: true
+<%- if @disable_s2s == false -%>
 <%- if @enable_mod_s2s_dialback -%>  mod_s2s_dialback: {}
 <%- else -%>  ## mod_s2s_dialback: {}
+<%- end -%>
 <%- end -%>
 <%- if @enable_mod_shared_roster -%>  mod_shared_roster: {}
 <%- else -%>  ## mod_shared_roster: {}
