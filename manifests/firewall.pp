@@ -110,13 +110,15 @@ class ejabberd::firewall (
           jump    => accept,
         }
 
-        # ejabberd - xmpp_s2s - TCP 5269
-        firewall { "${ejabberd_firewall_rule_order} ejabberd xmpp_s2s from ${client}":
-          chain   => 'INPUT',
-          dport   => $ejabberd_xmpp_s2s_port,
-          proto   => 'tcp',
-          ctstate => 'NEW',
-          jump    => accept,
+        if $disable_s2s == false {
+          # ejabberd - xmpp_s2s - TCP 5269
+          firewall { "${ejabberd_firewall_rule_order} ejabberd xmpp_s2s from ${client}":
+            chain   => 'INPUT',
+            dport   => $ejabberd_xmpp_s2s_port,
+            proto   => 'tcp',
+            ctstate => 'NEW',
+            jump    => accept,
+          }
         }
 
         # ejabberd - xmpp_admin_ui - TCP 5280
