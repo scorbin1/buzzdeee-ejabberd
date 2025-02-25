@@ -459,6 +459,11 @@
 #   Default Value: true
 #   Description: Whether to enable message archiving
 #
+# @param disable_s2s
+#   Type: Boolean
+#   Default Value: false
+#   Description: Whether to disable server to server communications
+#
 # === Examples
 #
 #  class { 'ejabberd':
@@ -568,6 +573,7 @@ class ejabberd (
   String                                                      $mod_muc_persistent_acl           = $ejabberd::params::mod_muc_persistent_acl,
   String                                                      $mod_muc_mam_acl                  = $ejabberd::params::mod_muc_mam_acl,
   Boolean                                                     $mod_muc_default_room_mam         = $ejabberd::params::mod_muc_default_room_mam,
+  Boolean                                                     $disable_s2s                      = $ejabberd::params::disable_s2s,
 ) inherits ejabberd::params {
   class { 'ejabberd::install':
     package_ensure   => $package_ensure,
@@ -641,6 +647,7 @@ class ejabberd (
     mod_muc_persistent_acl           => $mod_muc_persistent_acl,
     mod_muc_mam_acl                  => $mod_muc_mam_acl,
     mod_muc_default_room_mam         => $mod_muc_default_room_mam,
+    disable_s2s                      => $disable_s2s,
   }
 
   class { 'ejabberd::certificate':

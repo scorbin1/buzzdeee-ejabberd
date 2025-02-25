@@ -72,6 +72,7 @@ class ejabberd::config (
   String                                                      $mod_muc_persistent_acl,
   String                                                      $mod_muc_mam_acl,
   Boolean                                                     $mod_muc_default_room_mam,
+  Boolean                                                     $disable_s2s,
 ) {
   $config_filename = '/etc/ejabberd/ejabberd.yml'
 

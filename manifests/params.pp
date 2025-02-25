@@ -108,4 +108,5 @@ class ejabberd::params {
   $mod_muc_persistent_acl           = 'muc_create'
   $mod_muc_mam_acl                  = 'allow'
   $mod_muc_default_room_mam         = true
+  $disable_s2s                      = false
 }

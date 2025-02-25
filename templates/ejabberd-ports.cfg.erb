@@ -17,11 +17,13 @@ listen:
     access: c2s
     tls: true
     protocol_options: 'TLS_OPTIONS'
+<%- if @disable_s2s == false -%>
   -
     port: 5269
     ip: "::"
     module: ejabberd_s2s_in
     max_stanza_size: 524288
+<%- end -%>
   -
     port: 5443
     ip: "::"
